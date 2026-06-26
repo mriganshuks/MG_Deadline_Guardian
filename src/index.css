@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-jakarta: "Inter", sans-serif;
+  --font-instrument: "Inter", sans-serif;
+}
+
+/* Custom background grid overlay with emerald touch */
+.bg-grid-glow {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(52, 211, 153, 0.01) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(52, 211, 153, 0.01) 1px, transparent 1px);
+}
+
+.premium-blur-cyan {
+  filter: blur(140px);
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.06) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.premium-blur-purple {
+  filter: blur(140px);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.04) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.premium-blur-emerald {
+  filter: blur(140px);
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+/* Hide scrollbars but keep functional */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Disable transition on drag */
+.is-dragging {
+  transition: none !important;
+}
+
