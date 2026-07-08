@@ -150,7 +150,7 @@ Perform a realistic deadline risk evaluation. Estimate:
 5. A friendly, simple, and human response explaining why this is risky, keeping sentences short, and avoiding corporate or military jargon (no 'temporal stress', 'timeline collision', 'trajectory collapse', etc.).`;
 
     const response = await client.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-1.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are a supportive, friendly AI productivity coach. Your job is to help users understand how realistic their task deadlines are. You predict risk levels, explain reasons in plain human language, and suggest helpful, step-by-step tips.",
@@ -406,7 +406,7 @@ Each session title must clearly relate to the actual task. For example:
 Make each session title highly action-oriented and contextual to the real subject matter of "${cleanTitle}".`;
 
     const response = await client.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-1.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are a supportive AI Productivity Assistant. You help users stay on track by breaking down their goals into step-by-step sessions. Write in a simple, warm, encouraging tone suitable for a 17-year-old student. You MUST NOT use generic software-development templates unless the task is explicitly a software-development project. Make every single session title directly relevant and specific to the task's title and description. You MUST NOT use technical terms like congestion, pacing, chronology, workload compression, cognitive reserve, or intervention; use plain English instead.",
@@ -538,7 +538,7 @@ Identify exactly 3 warm and supportive productivity insights (patterns) based on
 Provide the overall workload trends and exactly 2 clear, helpful recommendations to bypass procrastination loops (e.g., 'Do complex tasks early in the morning', 'Add a 15-minute buffer between tasks').`;
 
     const response = await client.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-1.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are a supportive AI Productivity Companion. You analyze task completion history to offer helpful insights about user habits. You write in a simple, warm, friendly tone suitable for a 17-year-old student. You MUST NOT use technical terms like congestion, pacing, chronology, workload compression, cognitive reserve, or intervention. Use plain English instead.",
@@ -681,7 +681,7 @@ For BOTH scenarios, estimate:
 - Simple comparison breakdown.`;
 
     const response = await client.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-1.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are a time-management prediction assistant. You project task progress over 10 days to compare steady schedules versus last-minute rushes, showing why starting early reduces stress. Write in a simple, friendly tone suitable for a 17-year-old student. Do NOT use technical terms like congestion, pacing, chronology, workload compression, cognitive reserve, or intervention.",
@@ -868,7 +868,7 @@ Generate:
 No corporate, military, or fancy technical jargon is allowed (absolutely NO words like 'congestion', 'pacing', 'chronology', 'compression', 'reserve', 'intervention', 'temporal stress', 'timeline collision', 'trajectory collapse', etc.). Use humble, human, and literal language.`;
 
     const response = await client.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-1.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are a supportive AI Assistant. You review active tasks to summarize the user's workload, highlight any tasks that might be falling behind, outline simple reasons, and suggest actionable ways to catch up. Write in a simple, warm, friendly tone suitable for a 17-year-old student. You MUST NOT use technical terms like congestion, pacing, chronology, workload compression, cognitive reserve, or intervention. Use plain English instead.",

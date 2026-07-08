@@ -26,7 +26,6 @@ if (typeof window !== "undefined") {
   window.addEventListener("error", (event) => {
     if (
       event.message === "Script error." ||
-      event.message?.includes("firebase") ||
       event.message?.includes("supabase") ||
       event.message?.includes("auth") ||
       (event.filename && event.filename.includes("google"))
@@ -40,7 +39,6 @@ if (typeof window !== "undefined") {
     const msg = event.reason?.message || "";
     if (
       msg === "Script error." ||
-      msg.includes("firebase") ||
       msg.includes("supabase") ||
       msg.includes("auth") ||
       msg.includes("permission-denied")
