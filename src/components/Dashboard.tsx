@@ -731,212 +731,123 @@ export default function Dashboard({
       {/* =======================================
           HERO ELEMENT: THE TEMPORAL PROJECTION BAR
           ======================================= */}
-      <div className="bg-[#0b1220] border border-white/8 p-4 md:p-5 rounded-2xl relative overflow-hidden space-y-4">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-0 left-0 w-64 h-64 bg-red-500/5 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="max-w-2xl mx-auto text-center space-y-1.5">
-          <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-950/45 text-emerald-400 border border-emerald-900/25 text-[9px] font-mono rounded-full uppercase tracking-wider font-bold">
-            <Cpu size={10} className="text-emerald-400 animate-spin" /> Temporal Outcome Sandbox
+      <div className="bg-[#111111] border border-white/5 p-6 md:p-8 rounded-2xl relative overflow-hidden space-y-6 shadow-sm">
+        <div className="max-w-3xl mx-auto text-center space-y-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/5 text-white/70 text-[11px] font-medium rounded-full uppercase tracking-widest">
+            <Cpu size={12} className="text-white/40" /> Temporal Outcome Sandbox
           </div>
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-white tracking-tight">
-            How does procrastinating alter your future?
+          <h2 className="text-3xl md:text-4xl font-display font-semibold text-white tracking-tight">
+            How does procrastination alter your outcome?
           </h2>
-          <p className="text-sm text-slate-300 leading-normal font-normal">
-            Drag the temporal delay slider to simulate putting off starting on your workload. Watch how deadlines collapse, workloads compress, and stress rates spike in real-time.
+          <p className="text-base text-white/50 leading-relaxed font-light">
+            Drag the slider to simulate delaying your work. Watch how deadlines compress and stress levels spike.
           </p>
         </div>
 
         {/* The Futuristic Control Slider */}
-        <div className="max-w-xl mx-auto space-y-2 pt-1">
-          <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 px-1">
+        <div className="max-w-xl mx-auto space-y-4 pt-2">
+          <div className="flex items-center justify-between text-xs text-white/40 px-2 font-medium tracking-wide">
             <span>0 Days (Paced Flow)</span>
-            <span>7 Days (1 Week)</span>
+            <span>7 Days (Max Delay)</span>
           </div>
-          <div className="relative flex items-center py-1">
+          <div className="relative flex items-center py-2">
             <input
               type="range"
               min="0"
               max="7"
               value={delayDays}
               onChange={(e) => setDelayDays(Number(e.target.value))}
-              className="w-full h-1.5 bg-slate-950 border border-white/8 rounded-lg appearance-none cursor-pointer accent-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+              className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer accent-white focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
             />
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-4">
             <motion.div 
                key={delayDays}
-               initial={{ scale: 0.95, opacity: 0.8 }}
+               initial={{ scale: 0.98, opacity: 0.8 }}
                animate={{ scale: 1, opacity: 1 }}
-               className={`inline-flex items-center gap-2 font-mono text-xs font-bold py-1.5 px-4 rounded-xl border ${
+               className={`inline-flex items-center gap-2 text-sm font-medium py-2 px-5 rounded-full border transition-colors ${
                 delayDays === 0
-                  ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.06)]"
+                  ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
                   : delayDays <= 3
-                  ? "bg-amber-500/10 border-amber-500/30 text-amber-400"
-                  : "bg-red-500/15 border-red-500/35 text-red-400 animate-pulse shadow-[0_0_20px_rgba(239,68,68,0.1)]"
+                  ? "bg-amber-500/10 border-amber-500/20 text-amber-400"
+                  : "bg-red-500/10 border-red-500/20 text-red-400"
               }`}
             >
-              <Clock size={13} />
+              <Clock size={16} />
               Simulated Delay: {delayDays} {delayDays === 1 ? "Day" : "Days"}
             </motion.div>
           </div>
         </div>
 
         {/* =======================================
-            HIGH-CONTRAST ALTERNATE FUTURE COMPARISON
+            CLEAN NOTION-STYLE SPLIT VIEW COMPARISON
             ======================================= */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
           
-          {/* FUTURE A: DELAYED PATH (Hot Crimson Gradient) */}
-          <motion.div 
-            animate={delayDays > 0 ? {
-              borderColor: "rgba(239, 68, 68, 0.45)",
-              boxShadow: "0 0 20px rgba(239, 68, 68, 0.1)",
-              scale: 1.01
-            } : {
-              borderColor: "rgba(255, 255, 255, 0.08)",
-              boxShadow: "none",
-              scale: 1
-            }}
-            transition={{ duration: 0.4 }}
-            className="rounded-xl p-4 border relative overflow-hidden text-left bg-[#0b1220] space-y-3"
-          >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 rounded-full blur-2xl pointer-events-none" />
-            <div className="flex items-center justify-between border-b border-white/8 pb-2">
-              <span className="text-xs font-mono font-bold text-red-400 tracking-wider flex items-center gap-1.5 uppercase">
-                <TrendingDown size={14} className={delayDays > 0 ? "animate-bounce" : ""} /> Future A: Procrastination Cram
-              </span>
-              <span className="text-[10px] font-mono text-red-500/80 bg-red-500/5 border border-red-500/10 px-2 py-0.5 rounded-full font-bold">
-                Cramming Trajectory
+          {/* FUTURE A: DELAYED PATH */}
+          <div className={`rounded-2xl p-6 border transition-all duration-300 ${delayDays > 0 ? 'border-red-500/20 bg-red-500/5' : 'border-white/5 bg-[#161616]'}`}>
+            <div className="flex items-center justify-between pb-4 border-b border-white/5">
+              <span className={`text-sm font-semibold tracking-wide flex items-center gap-2 ${delayDays > 0 ? 'text-red-400' : 'text-white/60'}`}>
+                <TrendingDown size={18} /> If You Wait
               </span>
             </div>
 
-            <div className="grid grid-cols-3 gap-2 font-mono text-center">
-              <div className="p-2 bg-slate-950/50 border border-white/8 rounded-xl">
-                <span className="text-[8px] text-slate-500 block uppercase">Missed Deadlines</span>
-                <span className={`text-base font-bold block mt-0.5 ${dynamicMissedCount > 0 ? "text-red-400 animate-pulse" : "text-slate-350"}`}>
+            <div className="mt-6 space-y-6">
+              <div>
+                <span className="text-xs text-white/40 block mb-1 uppercase tracking-wider font-semibold">Expected Missed Deadlines</span>
+                <span className={`text-3xl font-bold ${dynamicMissedCount > 0 ? "text-red-400" : "text-white"}`}>
                   {dynamicMissedCount}
                 </span>
               </div>
-              <div className="p-2 bg-slate-950/50 border border-white/8 rounded-xl">
-                <span className="text-[8px] text-slate-500 block uppercase">Success Rate</span>
-                <span className={`text-base font-bold block mt-0.5 ${delayDays > 0 ? "text-red-400 font-bold" : "text-slate-350"}`}>
-                  {dynamicAvgSuccess}%
-                </span>
-              </div>
-              <div className="p-2 bg-slate-950/50 border border-white/8 rounded-xl">
-                <span className="text-[8px] text-slate-500 block uppercase">Peak Daily Focus</span>
-                <span className="text-base font-bold text-slate-350 block mt-0.5">
-                  {delayDays === 0 ? "1.5h" : delayDays <= 3 ? "3.2h" : "7.5h+"}
+              
+              <div>
+                <span className="text-xs text-white/40 block mb-1 uppercase tracking-wider font-semibold">Peak Daily Workload</span>
+                <span className="text-xl font-medium text-white/80 block">
+                  {delayDays === 0 ? "1.5 hours" : delayDays <= 3 ? "3.2 hours" : "7.5+ hours (Overload)"}
                 </span>
               </div>
             </div>
 
-            {/* Custom SVG Path representing compression stress spike */}
-            <div className="h-14 w-full bg-slate-950/50 rounded-xl border border-white/8 flex items-center justify-center relative px-4 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-red-500/[0.02] via-transparent to-transparent pointer-events-none" />
-              <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 100">
-                {/* Horizontal Baseline */}
-                <line x1="0" y1="80" x2="100" y2="80" stroke="rgba(255,255,255,0.05)" strokeWidth="1" strokeDasharray="3,3" />
-                
-                {/* Simulated stress graph path */}
-                <motion.path
-                  key={delayDays}
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 0.8 }}
-                  d={
-                    delayDays === 0
-                      ? "M 0 70 Q 25 65, 50 60 T 100 50"
-                      : delayDays <= 3
-                      ? "M 0 70 Q 25 68, 50 50 T 100 25"
-                      : "M 0 75 Q 35 70, 70 30 T 100 5"
-                  }
-                  fill="none"
-                  stroke={delayDays === 0 ? "rgba(239, 68, 68, 0.4)" : "rgba(239, 68, 68, 0.95)"}
-                  strokeWidth="2.5"
-                />
-                
-                {/* Warning dots */}
-                {delayDays > 3 && (
-                  <>
-                    <circle cx="70" cy="30" r="3" fill="#ef4444" className="animate-ping" />
-                    <circle cx="100" cy="5" r="4.5" fill="#ef4444" className="animate-pulse" />
-                  </>
-                )}
-              </svg>
-              <div className="absolute bottom-2 right-3 font-mono text-[8px] text-red-500 font-bold uppercase tracking-wider">
-                {delayDays === 0 ? "Normal Load" : delayDays <= 3 ? "Compression" : "Overload Burst"}
-              </div>
+            <div className="mt-8">
+              <p className="text-sm text-white/50 leading-relaxed">
+                {delayDays === 0 
+                  ? "Delaying starting on tasks will instantly compress your remaining hours."
+                  : `Postponing for ${delayDays} day${delayDays === 1 ? '' : 's'} forces you to compress massive work sessions into a tight window.`
+                }
+              </p>
             </div>
+          </div>
 
-            <p className="text-xs text-slate-355 font-normal leading-relaxed">
-              {delayDays === 0 
-                ? "Currently resting in the safe zone. Delaying starting on tasks will instantly compress your remaining hours."
-                : `By postponing for ${delayDays} day${delayDays === 1 ? '' : 's'}, you run a serious risk of overload. On the final days, you will be forced to compress massive work sessions with zero breathing space.`
-              }
-            </p>
-          </motion.div>
-
-          {/* FUTURE B: AI-GUARDED PACED PATH (Bright Emerald Glow) */}
-          <div className="rounded-xl p-4 border border-emerald-500/20 text-left bg-[#0b1220] space-y-3 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
-            <div className="flex items-center justify-between border-b border-white/8 pb-2">
-              <span className="text-xs font-mono font-bold text-emerald-400 tracking-wider flex items-center gap-1.5 uppercase">
-                <ShieldCheck size={14} className="text-emerald-400" /> Future B: AI-Guarded Paced Pathway
-              </span>
-              <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/5 border border-emerald-500/10 px-2 py-0.5 rounded-full font-bold">
-                Secure Trajectory
+          {/* FUTURE B: PACED PATH */}
+          <div className="rounded-2xl p-6 border border-emerald-500/20 bg-emerald-500/5 relative overflow-hidden">
+            <div className="flex items-center justify-between pb-4 border-b border-white/5">
+              <span className="text-sm font-semibold text-emerald-400 tracking-wide flex items-center gap-2">
+                <ShieldCheck size={18} /> AI Recommended Plan
               </span>
             </div>
 
-            <div className="grid grid-cols-3 gap-2 font-mono text-center">
-              <div className="p-2 bg-slate-950/50 border border-white/8 rounded-xl">
-                <span className="text-[8px] text-slate-500 block uppercase">Missed Deadlines</span>
-                <span className="text-base font-bold block mt-0.5 text-emerald-400 font-mono font-bold">
+            <div className="mt-6 space-y-6">
+              <div>
+                <span className="text-xs text-emerald-500/60 block mb-1 uppercase tracking-wider font-semibold">Expected Missed Deadlines</span>
+                <span className="text-3xl font-bold text-emerald-400">
                   0
                 </span>
               </div>
-              <div className="p-2 bg-slate-950/50 border border-white/8 rounded-xl">
-                <span className="text-[8px] text-slate-500 block uppercase">Success Rate</span>
-                <span className="text-base font-bold block mt-0.5 text-emerald-400 font-mono font-bold">
-                  98%
-                </span>
-              </div>
-              <div className="p-2 bg-slate-950/50 border border-white/8 rounded-xl">
-                <span className="text-[8px] text-slate-500 block uppercase">Steady Daily Time</span>
-                <span className="text-base font-bold text-slate-350 block mt-0.5">
-                  1.2h - 1.8h
+              
+              <div>
+                <span className="text-xs text-emerald-500/60 block mb-1 uppercase tracking-wider font-semibold">Peak Daily Workload</span>
+                <span className="text-xl font-medium text-emerald-100/80 block">
+                  1.5 hours (Paced)
                 </span>
               </div>
             </div>
 
-            {/* Stable SVG Path */}
-            <div className="h-14 w-full bg-slate-950/50 rounded-xl border border-white/8 flex items-center justify-center relative px-4 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/[0.02] via-transparent to-transparent pointer-events-none" />
-              <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 100">
-                <line x1="0" y1="80" x2="100" y2="80" stroke="rgba(255,255,255,0.05)" strokeWidth="1" strokeDasharray="3,3" />
-                <motion.path
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 0.8 }}
-                  d="M 0 50 L 30 50 L 60 50 L 100 50"
-                  fill="none"
-                  stroke="rgba(16, 185, 129, 0.95)"
-                  strokeWidth="2.5"
-                />
-                <circle cx="100" cy="50" r="4.5" fill="#10b981" />
-              </svg>
-              <div className="absolute bottom-2 right-3 font-mono text-[8px] text-emerald-400 font-bold uppercase tracking-wider">
-                Steady Flow
-              </div>
+            <div className="mt-8">
+              <p className="text-sm text-emerald-100/60 leading-relaxed">
+                Steadily breaking your effort down into daily micro-sessions eliminates cramming and guarantees flawless delivery with zero stress.
+              </p>
             </div>
-
-            <p className="text-xs text-slate-355 font-normal leading-relaxed">
-              Steadily breaking your effort down into distributed daily micro-sessions eliminates cramming entirely, protects your weekends, and guarantees flawless delivery with maximum peace of mind.
-            </p>
           </div>
-
         </div>
 
       </div>
@@ -945,36 +856,31 @@ export default function Dashboard({
           CO-PILOT AI BRIEFING (HUD BAR)
           ======================================= */}
       {intelReport && (
-        <div className="relative overflow-hidden rounded-2xl bg-[#0b1220] border border-white/8 p-4 shadow-xl space-y-3 text-left">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
-          <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/15 to-transparent" />
-          
-          <div className="flex items-center justify-between border-b border-white/8 pb-2">
-            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-emerald-950/40 border border-emerald-850/35 rounded-md text-[10px] text-emerald-400 font-mono font-bold uppercase tracking-wider">
-              <Cpu size={12} className={loading ? "animate-spin" : ""} /> Co-Pilot AI Briefing Stack
+        <div className="relative overflow-hidden rounded-2xl bg-[#161616] border border-white/5 p-6 shadow-sm space-y-4 text-left">
+          <div className="flex items-center justify-between border-b border-white/5 pb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-white/80 font-medium tracking-wide">
+              <Sparkles size={14} className={loading ? "animate-pulse" : "text-white/60"} /> Your AI Assistant
             </div>
             <button
               onClick={() => setRefreshTrigger(prev => prev + 1)}
               disabled={loading}
-              className="inline-flex items-center h-8 px-3 bg-emerald-500/10 hover:bg-emerald-500/20 text-[10px] text-emerald-400 font-mono font-bold rounded-lg border border-emerald-400/20 cursor-pointer disabled:opacity-40 transition"
+              className="inline-flex items-center h-8 px-4 bg-white/5 hover:bg-white/10 text-xs text-white font-medium rounded-full border border-white/10 cursor-pointer disabled:opacity-40 transition-colors"
             >
-              {loading ? "Analyzing..." : "Sync AI Engine"}
+              {loading ? "Thinking..." : "Refresh Insights"}
             </button>
           </div>
 
           <div>
             {loading ? (
-              <div className="space-y-2 py-6 max-w-md mx-auto text-center">
-                <div className="w-8 h-8 rounded-full border-2 border-emerald-500/20 border-t-emerald-400 animate-spin mx-auto" />
-                <p className="text-[10px] font-mono text-emerald-400">Syncing telemetry data...</p>
+              <div className="space-y-3 py-8 max-w-md mx-auto text-center">
+                <div className="w-6 h-6 rounded-full border-2 border-white/10 border-t-white/60 animate-spin mx-auto" />
+                <p className="text-xs font-medium text-white/50 tracking-wide">Analyzing your workload...</p>
               </div>
             ) : (
-              <div className="pt-1">
+              <div className="pt-2">
                 <GlassStackCard
                   items={getBriefingCards()}
                   visibleBehind={2}
-                  headerTitle="Predictive Insights Stack"
-                  headerSubtitle="Swipe or drag to scan critical timeline updates"
                 />
               </div>
             )}
@@ -986,36 +892,36 @@ export default function Dashboard({
           THE TEMPORAL PROGRESS PATH (INTERCONNECTED ROADMAP NODES)
           ========================================================= */}
       {activeTasks.length === 0 ? (
-        <div className="bg-[#0b1220] border border-dashed border-white/8 p-8 text-center rounded-2xl max-w-lg mx-auto space-y-3">
-          <ShieldCheck size={28} className="mx-auto text-emerald-400" />
+        <div className="bg-[#111111] border border-dashed border-white/10 p-12 text-center rounded-2xl max-w-xl mx-auto space-y-4">
+          <ShieldCheck size={36} className="mx-auto text-emerald-400 opacity-80" />
           <div>
-            <h4 className="text-xs font-bold text-white">All Commitments Completed on Time</h4>
-            <p className="text-[11px] text-slate-500 mt-0.5 leading-normal font-light">
-              Add a new project or homework deadline in the 'Track New Deadline' tab to simulate.
+            <h4 className="text-lg font-medium text-white">All Clear</h4>
+            <p className="text-sm text-white/50 mt-2 leading-relaxed">
+              You have no active deadlines right now. Track a new project to simulate the roadmap.
             </p>
           </div>
           <button
             onClick={() => onNavigate("add-task")}
-            className="px-3.5 py-1.5 bg-emerald-400 text-[#050816] font-mono text-[10px] rounded-lg hover:bg-[#10b981] transition font-bold"
+            className="px-6 py-3 mt-4 bg-white text-black font-semibold text-sm rounded-full hover:bg-gray-200 transition-colors"
           >
-            Create Task Predictor &rarr;
+            Track New Deadline
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start pt-1">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-2">
           
           {/* Left Column: Vertical Interactive Connecting Path */}
-          <div className="lg:col-span-6 bg-[#0b1220] border border-white/8 p-4 rounded-2xl relative space-y-3">
-            <div className="text-[10px] font-mono text-slate-500 tracking-wider pb-2 border-b border-white/8 flex items-center justify-between">
-              <span>ACTIVE PREDICTION ROADMAP</span>
-              <span>SELECT NODE TO INSPECT</span>
+          <div className="lg:col-span-6 bg-[#111111] border border-white/5 p-6 rounded-2xl relative space-y-6 shadow-sm">
+            <div className="text-xs font-semibold text-white/40 tracking-widest pb-4 border-b border-white/5 flex items-center justify-between uppercase">
+              <span>Your Roadmap</span>
+              <span>Select to Inspect</span>
             </div>
 
             {/* The physical path */}
-            <div className="relative pl-7 space-y-4">
+            <div className="relative pl-8 space-y-6">
               
               {/* Connecting vertical line */}
-              <div className="absolute top-3 bottom-3 left-[13px] w-[2px] bg-gradient-to-b from-emerald-500/30 via-slate-850 to-transparent border-dashed border-l border-white/8" />
+              <div className="absolute top-4 bottom-4 left-[15px] w-[2px] bg-white/5" />
 
               {dynamicActiveStates.map((item, idx) => {
                 const task = item.original;
@@ -1023,22 +929,22 @@ export default function Dashboard({
                 const active = task.id === selectedTaskNodeId;
                 
                 // Color selection
-                let nodeColorClass = "bg-emerald-500 text-emerald-400 ring-emerald-500/20";
-                let badgeLabel = "✓ SECURE";
-                let badgeColorClass = "text-emerald-400 bg-emerald-500/10 border-emerald-500/20";
+                let nodeColorClass = "bg-emerald-500 ring-emerald-500/20";
+                let badgeLabel = "Secure";
+                let badgeColorClass = "text-emerald-400 bg-emerald-500/10";
 
                 if (simState.isMissed) {
-                  nodeColorClass = "bg-red-500 text-red-500 ring-red-500/30 animate-pulse";
-                  badgeLabel = "💥 DEADLINE IMPACTED";
-                  badgeColorClass = "text-red-400 bg-red-500/15 border-red-500/20 animate-pulse";
+                  nodeColorClass = "bg-red-500 ring-red-500/30 animate-pulse";
+                  badgeLabel = "Delayed";
+                  badgeColorClass = "text-red-400 bg-red-500/10";
                 } else if (simState.riskScore >= 70) {
-                  nodeColorClass = "bg-red-400 text-red-400 ring-red-400/20";
-                  badgeLabel = "⚠️ CRITICAL COMPRESSION";
-                  badgeColorClass = "text-red-400 bg-red-950/20 border-red-900/30";
+                  nodeColorClass = "bg-red-400 ring-red-400/20";
+                  badgeLabel = "At Risk";
+                  badgeColorClass = "text-red-400 bg-red-500/10";
                 } else if (simState.riskScore >= 45) {
-                  nodeColorClass = "bg-amber-500 text-amber-500 ring-amber-500/20";
-                  badgeLabel = "⏳ BUFFER SHRINKING";
-                  badgeColorClass = "text-amber-400 bg-amber-500/10 border-amber-500/20";
+                  nodeColorClass = "bg-amber-500 ring-amber-500/20";
+                  badgeLabel = "Shrinking Buffer";
+                  badgeColorClass = "text-amber-400 bg-amber-500/10";
                 }
 
                 return (
@@ -1049,42 +955,32 @@ export default function Dashboard({
                       setSelectedTaskNodeId(task.id);
                       setPlanErrorMsg(prev => ({ ...prev, [task.id]: "" }));
                     }}
-                    className={`p-3 rounded-xl border text-left transition-all relative flex flex-col sm:flex-row sm:items-center justify-between gap-3 cursor-pointer group ${
+                    className={`p-5 rounded-2xl border text-left transition-all relative flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer group ${
                       active
-                        ? "bg-emerald-500/5 border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.06)]"
-                        : "bg-[#0b1220]/50 border-white/8 hover:border-emerald-500/20 hover:bg-emerald-500/[0.02]"
+                        ? "bg-white/5 border-white/20 shadow-sm"
+                        : "bg-transparent border-transparent hover:bg-white/[0.02]"
                     }`}
                   >
                     {/* Floating connected circular point indicator */}
-                    <div className="absolute top-4 left-[-31px] w-4 h-4 rounded-full bg-slate-950 flex items-center justify-center z-10">
-                      <div className={`w-2.5 h-2.5 rounded-full ${nodeColorClass.split(" ")[0]} ring-4 ${nodeColorClass.split(" ")[2]}`} />
+                    <div className="absolute top-6 left-[-35px] w-5 h-5 rounded-full bg-[#111111] flex items-center justify-center z-10">
+                      <div className={`w-2.5 h-2.5 rounded-full ${nodeColorClass} ring-4 ${nodeColorClass}`} />
                     </div>
 
-                    <div className="space-y-1.5 truncate max-w-xs">
-                      <div className="font-mono text-[9px] text-slate-500 uppercase flex items-center gap-1">
-                        <Bookmark size={8} /> Category: {task.category}
-                      </div>
-                      <h4 className="font-sans font-bold text-white text-[13.5px] truncate">
+                    <div className="space-y-2 truncate max-w-xs">
+                      <h4 className="font-display font-semibold text-white text-base truncate">
                         {task.title}
                       </h4>
-                      <p className="font-mono text-[10px] text-slate-450 leading-none">
-                        Due: {task.deadline} &bull; Effort: {task.estimatedHours}h
+                      <p className="text-sm text-white/50">
+                        Due {task.deadline}
                       </p>
                     </div>
 
                     {/* Node status indicators */}
-                    <div className="flex items-center gap-2 shrink-0">
-                      <span className={`text-[8.5px] font-mono font-bold px-2 py-0.5 rounded border ${badgeColorClass}`}>
+                    <div className="flex items-center gap-4 shrink-0">
+                      <span className={`text-xs font-semibold px-3 py-1 rounded-full ${badgeColorClass}`}>
                         {badgeLabel}
                       </span>
-                      <div className="flex flex-col items-end text-right font-mono text-[10px]">
-                        <span className="text-slate-500 font-light">Risk Factor</span>
-                        <span className={`font-bold ${simState.riskScore >= 70 ? "text-red-400" : simState.riskScore >= 45 ? "text-amber-400" : "text-emerald-400"}`}>
-                          {simState.riskScore}%
-                        </span>
-                      </div>
                     </div>
-
                   </motion.div>
                 );
               })}
@@ -1101,55 +997,51 @@ export default function Dashboard({
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.98, y: -5 }}
                   transition={{ duration: 0.25 }}
-                  className="bg-[#0b1220] border border-white/8 p-4 rounded-2xl relative space-y-4 shadow-xl text-left"
+                  className="bg-[#161616] border border-white/5 p-6 rounded-2xl relative space-y-6 shadow-sm text-left"
                 >
-                  <div className="absolute top-0 left-8 right-8 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
                   
                   {/* Inspector Header */}
-                  <div className="flex items-start justify-between gap-3 border-b border-white/8 pb-3">
-                    <div className="space-y-0.5">
-                      <div className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-emerald-950/40 border border-emerald-850/45 rounded text-[8px] font-mono text-emerald-400 uppercase">
-                        Node Inspector
+                  <div className="flex items-start justify-between gap-4 border-b border-white/5 pb-4">
+                    <div className="space-y-2">
+                      <div className="inline-flex items-center gap-1 text-xs font-semibold text-white/40 uppercase tracking-widest">
+                        Your Progress
                       </div>
-                      <h3 className="font-sans font-bold text-white text-sm leading-tight tracking-tight">
+                      <h3 className="font-display font-semibold text-white text-xl leading-tight">
                         {selectedNodeData.original.title}
                       </h3>
-                      <p className="text-[11px] text-slate-400 font-light max-w-md">
-                        {selectedNodeData.original.description || "No project notes configured."}
-                      </p>
                     </div>
 
                     <button
                       onClick={() => onToggleTask(selectedNodeData.id)}
-                      className="px-3 py-1 bg-emerald-400 hover:bg-[#10b981] text-[#050816] text-[10px] font-mono font-bold rounded-md cursor-pointer transition shrink-0"
+                      className="px-4 py-2 bg-white hover:bg-gray-200 text-black text-sm font-semibold rounded-full cursor-pointer transition shrink-0"
                     >
-                      Complete Task
+                      Complete
                     </button>
                   </div>
 
                   {/* Slider Adaptive Risk Panel */}
-                  <div className="space-y-3">
-                    <h4 className="text-[9px] font-mono font-bold uppercase tracking-wider text-slate-500">
-                      Simulated Timeline Risk Assessment
+                  <div className="space-y-4">
+                    <h4 className="text-xs font-semibold uppercase tracking-widest text-white/40">
+                      Chance of Missing Deadline
                     </h4>
 
                     {/* The Bento Metrics Grid */}
-                    <div className="grid grid-cols-3 gap-2 text-center">
-                      <div className="p-2 bg-slate-950/40 border border-white/8 rounded-xl flex flex-col justify-center">
-                        <span className="text-[8px] text-slate-500 font-mono block">COMPLETION CHANCE</span>
-                        <span className={`text-sm font-mono font-bold block mt-0.5 ${selectedNodeData.simulated.riskScore >= 70 ? "text-red-400" : "text-emerald-400"}`}>
+                    <div className="grid grid-cols-3 gap-4 text-center">
+                      <div className="p-4 bg-white/5 border border-white/10 rounded-xl flex flex-col justify-center">
+                        <span className="text-xs text-white/50 font-medium block mb-1">Success</span>
+                        <span className={`text-xl font-bold block ${selectedNodeData.simulated.riskScore >= 70 ? "text-red-400" : "text-white"}`}>
                           {100 - selectedNodeData.simulated.riskScore}%
                         </span>
                       </div>
-                      <div className="p-2 bg-slate-950/40 border border-white/8 rounded-xl flex flex-col justify-center">
-                        <span className="text-[8px] text-slate-500 font-mono block">DAYS REMAINING</span>
-                        <span className="text-sm font-mono font-bold text-white block mt-0.5">
+                      <div className="p-4 bg-white/5 border border-white/10 rounded-xl flex flex-col justify-center">
+                        <span className="text-xs text-white/50 font-medium block mb-1">Time Left</span>
+                        <span className="text-xl font-bold text-white block">
                           {selectedNodeData.simulated.daysRemaining}d
                         </span>
                       </div>
-                      <div className="p-2 bg-slate-950/40 border border-white/8 rounded-xl flex flex-col justify-center">
-                        <span className="text-[8px] text-slate-500 font-mono block">WORKLOAD INTENSITY</span>
-                        <span className={`text-sm font-mono font-semibold block mt-0.5 ${selectedNodeData.simulated.hoursRequiredPerDay > 3.5 ? "text-red-400" : "text-amber-400"}`}>
+                      <div className="p-4 bg-white/5 border border-white/10 rounded-xl flex flex-col justify-center">
+                        <span className="text-xs text-white/50 font-medium block mb-1">Daily Work</span>
+                        <span className={`text-xl font-bold block ${selectedNodeData.simulated.hoursRequiredPerDay > 3.5 ? "text-red-400" : "text-white"}`}>
                           {selectedNodeData.simulated.hoursRequiredPerDay}h/d
                         </span>
                       </div>
@@ -1157,27 +1049,27 @@ export default function Dashboard({
 
                     {/* Delay warning callouts */}
                     {selectedNodeData.simulated.isMissed ? (
-                      <div className="bg-red-500/10 border border-red-500/30 p-2.5 rounded-lg flex items-start gap-2.5">
-                        <ShieldAlert size={14} className="text-red-400 animate-pulse shrink-0 mt-0.5" />
-                        <div className="space-y-0.5 text-left">
-                          <span className="text-[9px] font-mono font-bold text-red-400 uppercase tracking-wide block">💥 Critical Time Crunch Collapse</span>
-                          <p className="text-[10.5px] text-red-200 font-semibold leading-relaxed">
-                            Delaying starting on this task causes the required focus time to exceed manageable levels! Missed deadline expected.
+                      <div className="bg-red-500/10 border border-red-500/20 p-4 rounded-xl flex items-start gap-3">
+                        <ShieldAlert size={18} className="text-red-400 shrink-0 mt-0.5" />
+                        <div className="space-y-1 text-left">
+                          <span className="text-sm font-semibold text-red-400 block">Critical Crunch</span>
+                          <p className="text-sm text-red-200/80 leading-relaxed">
+                            Delaying this task means you will not have enough hours in the day to finish it.
                           </p>
                         </div>
                       </div>
                     ) : selectedNodeData.simulated.riskScore >= 65 ? (
-                      <div className="bg-amber-500/5 border border-amber-500/20 p-2.5 rounded-lg flex items-start gap-2">
-                        <Flame size={13} className="text-amber-400 shrink-0 mt-0.5 animate-pulse" />
-                        <p className="text-[10.5px] text-amber-200 leading-relaxed font-light">
-                          If delayed, you will face an end-of-timeline rush. Start the recovery action steps below immediately to spread the load.
+                      <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl flex items-start gap-3">
+                        <Flame size={18} className="text-amber-400 shrink-0 mt-0.5" />
+                        <p className="text-sm text-amber-200/80 leading-relaxed font-normal">
+                          You are approaching the danger zone. Follow the recovery plan below to spread out the work.
                         </p>
                       </div>
                     ) : (
-                      <div className="bg-emerald-500/5 border border-emerald-500/15 p-2.5 rounded-lg flex items-start gap-2">
-                        <ShieldCheck size={13} className="text-emerald-400 shrink-0 mt-0.5" />
-                        <p className="text-[10.5px] text-emerald-300 leading-relaxed font-light">
-                          Current start window is comfortable. Breakdown is secure. Let's keep it steady.
+                      <div className="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl flex items-start gap-3">
+                        <ShieldCheck size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                        <p className="text-sm text-emerald-200/80 leading-relaxed font-normal">
+                          You have plenty of time. Stick to a steady pace and you'll finish early.
                         </p>
                       </div>
                     )}
@@ -1185,22 +1077,25 @@ export default function Dashboard({
 
                   {/* Why At Risk Panel */}
                   {selectedNodeData.original.riskScore ? (
-                    <div className="space-y-1.5 border-t border-white/8 pt-3">
-                      <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider block">AI Prediction Context</span>
-                      <p className="text-[11px] text-slate-350 leading-relaxed font-light font-sans pl-2.5 border-l border-white/8">
-                        {selectedNodeData.original.riskExplanation || "The timeline requires disciplined pace slots to guarantee delivery."}
+                    <details className="group border-t border-white/5 pt-4">
+                      <summary className="text-xs font-semibold text-white/40 uppercase tracking-widest cursor-pointer hover:text-white/60 transition-colors flex items-center justify-between">
+                        See AI Insights
+                        <ChevronRight size={14} className="group-open:rotate-90 transition-transform" />
+                      </summary>
+                      <p className="text-sm text-white/60 leading-relaxed font-light mt-4 pl-4 border-l-2 border-white/10">
+                        {selectedNodeData.original.riskExplanation || "The timeline requires disciplined pacing."}
                       </p>
-                    </div>
+                    </details>
                   ) : (
-                    <div className="bg-slate-950/40 p-3 rounded-lg border border-white/8 flex items-center justify-between gap-3 text-left">
+                    <div className="bg-white/5 p-4 rounded-xl border border-white/10 flex items-center justify-between gap-4 text-left">
                       <div>
-                        <span className="text-[8px] text-slate-500 font-mono block">Evaluation State</span>
-                        <p className="text-[11px] text-slate-400 font-light mt-0.5">This task's baseline risk has not been analyzed by the coach yet.</p>
+                        <span className="text-xs text-white/50 font-medium block">Evaluation State</span>
+                        <p className="text-sm text-white/80 font-light mt-1">This task has not been analyzed by the coach yet.</p>
                       </div>
                       <button
                         onClick={() => handleRunRiskAnalysis(selectedNodeData.original)}
                         disabled={analyzingTaskId === selectedNodeData.id}
-                        className="px-2.5 py-1 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-[10px] font-mono rounded border border-emerald-400/25 cursor-pointer disabled:opacity-40 transition shrink-0"
+                        className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-semibold rounded-full border border-white/10 cursor-pointer disabled:opacity-40 transition shrink-0"
                       >
                         {analyzingTaskId === selectedNodeData.id ? "Analyzing..." : "Analyze Risk"}
                       </button>
@@ -1210,52 +1105,52 @@ export default function Dashboard({
                   {/* =====================================
                       ACTION ROADMAP & FOCUS CHECKLIST
                       ===================================== */}
-                  <div className="border-t border-white/8 pt-3 space-y-3 text-left">
+                  <div className="border-t border-white/5 pt-4 space-y-4 text-left">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-[9px] font-mono font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                        <Compass size={11} className="text-emerald-400" /> Catch-Up Action Roadmap
+                      <h4 className="text-xs font-semibold uppercase tracking-widest text-white/40 flex items-center gap-2">
+                        <Compass size={14} className="text-white/60" /> Catch-Up Action Roadmap
                       </h4>
                       {selectedNodeData.original.recoveryPlan && (
                         <button
                           onClick={() => handleRecalculatePlanForTask(selectedNodeData.original)}
                           disabled={generatingTaskId === selectedNodeData.id}
-                          className="text-[8px] font-mono text-emerald-400 bg-emerald-500/5 hover:bg-emerald-500/15 px-1.5 py-0.5 rounded border border-emerald-400/20 cursor-pointer disabled:opacity-40 transition flex items-center gap-0.5"
+                          className="text-xs font-semibold text-white/60 hover:text-white px-3 py-1.5 rounded-full border border-white/10 hover:bg-white/5 cursor-pointer disabled:opacity-40 transition flex items-center gap-1.5"
                           title="Fallen behind? Recreate step intervals instantly"
                         >
-                          <Zap size={8} /> {generatingTaskId === selectedNodeData.id ? "Recalculating..." : "Recalculate Flow"}
+                          <Zap size={12} /> {generatingTaskId === selectedNodeData.id ? "Recalculating..." : "Recalculate"}
                         </button>
                       )}
                     </div>
 
                     {planErrorMsg[selectedNodeData.id] && (
-                      <div className="p-2 bg-red-950/15 border border-red-500/15 rounded-lg text-[10px] text-red-400 font-mono flex items-center gap-1.5">
-                        <AlertOctagon size={10} /> {planErrorMsg[selectedNodeData.id]}
+                      <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-sm text-red-400 flex items-center gap-2">
+                        <AlertOctagon size={16} /> {planErrorMsg[selectedNodeData.id]}
                       </div>
                     )}
 
                     {selectedNodeData.original.recoveryPlan ? (
-                      <div className="space-y-3">
-                        <p className="text-[11px] text-slate-300 bg-[#050816]/40 p-2.5 rounded-lg border border-white/8 font-light leading-relaxed font-sans">
-                          <strong className="text-[9px] font-mono text-emerald-400 uppercase tracking-wide block mb-1 font-bold">AI Action Strategy:</strong>
+                      <div className="space-y-4">
+                        <p className="text-sm text-white/80 bg-white/5 p-4 rounded-xl border border-white/10 font-light leading-relaxed">
+                          <strong className="text-xs text-white/40 uppercase tracking-widest block mb-2 font-semibold">AI Action Strategy:</strong>
                           {selectedNodeData.original.recoveryPlan.overallStrategy}
                         </p>
 
                         {/* List of focus sessions */}
-                        <div className="space-y-1.5 max-h-[170px] overflow-y-auto pr-1 no-scrollbar">
+                        <div className="space-y-2 max-h-[220px] overflow-y-auto pr-2 no-scrollbar">
                           {selectedNodeData.original.recoveryPlan.sessions.map((session: TaskSession, idx) => {
                             const overdue = !session.completed && session.dueDate < new Date().toISOString().split('T')[0];
                             return (
                               <div
                                 key={session.id}
-                                className={`p-2 rounded-lg border flex items-center justify-between gap-2.5 text-xs transition ${
+                                className={`p-4 rounded-xl border flex items-center justify-between gap-3 text-sm transition-all ${
                                   session.completed
-                                    ? "bg-[#0b1220]/30 border-white/8 opacity-65"
+                                    ? "bg-transparent border-white/5 opacity-50"
                                     : overdue
-                                    ? "bg-red-950/5 border-red-500/15 shadow-[0_0_10px_rgba(239,68,68,0.03)]"
-                                    : "bg-slate-950/40 border border-white/8"
+                                    ? "bg-red-500/5 border-red-500/20 shadow-sm"
+                                    : "bg-[#111111] border-white/10"
                                 }`}
                               >
-                                <div className="flex items-center gap-2.5 truncate">
+                                <div className="flex items-center gap-4 truncate">
                                   {/* Checkbox */}
                                   <button
                                     onClick={() => {
@@ -1263,26 +1158,26 @@ export default function Dashboard({
                                         onToggleSession(selectedNodeData.id, session.id, session.completed ? 'pending' : 'completed');
                                       }
                                     }}
-                                    className="p-1 border border-white/8 hover:border-emerald-500/40 rounded-lg bg-slate-900 cursor-pointer text-slate-400 hover:text-emerald-400 transition"
+                                    className="p-1 border border-white/20 hover:border-white/50 rounded-lg bg-transparent cursor-pointer text-white/50 hover:text-white transition-colors"
                                   >
                                     {session.completed ? (
-                                      <CheckCircle2 size={13} className="text-emerald-400" />
+                                      <CheckCircle2 size={16} className="text-white" />
                                     ) : (
-                                      <div className="w-3.5 h-3.5 bg-transparent" />
+                                      <div className="w-4 h-4 bg-transparent" />
                                     )}
                                   </button>
 
-                                  <div className="truncate text-left space-y-0.5">
-                                    <span className={`text-[11.5px] block truncate ${session.completed ? "line-through text-slate-500 font-sans" : "text-slate-200 font-sans"}`}>
+                                  <div className="truncate text-left space-y-1">
+                                    <span className={`text-base block truncate font-medium ${session.completed ? "line-through text-white/50" : "text-white/90"}`}>
                                       {idx + 1}. {session.title}
                                     </span>
-                                    <div className="flex items-center gap-1.5 text-[9px] font-mono text-slate-500 leading-none">
-                                      <Calendar size={9} /> Due: {session.dueDate} &bull; <Clock size={9} /> {session.durationHours} hrs
+                                    <div className="flex items-center gap-2 text-xs font-semibold text-white/40">
+                                      <Calendar size={12} /> Due: {session.dueDate} &bull; <Clock size={12} /> {session.durationHours} hrs
                                       {session.missed && (
-                                        <span className="text-red-400 font-bold ml-1">MISSED</span>
+                                        <span className="text-red-400 font-bold ml-2">MISSED</span>
                                       )}
                                       {overdue && (
-                                        <span className="text-red-400 font-bold ml-1 animate-pulse">OVERDUE</span>
+                                        <span className="text-red-400 font-bold ml-2 animate-pulse">OVERDUE</span>
                                       )}
                                     </div>
                                   </div>
@@ -1293,14 +1188,14 @@ export default function Dashboard({
                                   {!session.completed && onToggleSession && (
                                     <button
                                       onClick={() => onToggleSession(selectedNodeData.id, session.id, 'missed')}
-                                      className="px-2 py-0.5 bg-red-500/5 hover:bg-red-500/15 text-[8px] font-mono text-red-400 border border-red-500/10 hover:border-red-500/25 rounded transition"
+                                      className="px-3 py-1 bg-red-500/10 hover:bg-red-500/20 text-xs font-semibold text-red-400 border border-red-500/20 rounded-lg transition-colors"
                                       title="Mark as missed to log a delay"
                                     >
                                       Missed
                                     </button>
                                   )}
                                   {session.googleEventId ? (
-                                    <span className="px-1.5 py-0.5 bg-emerald-500/10 text-[8px] font-mono font-bold text-emerald-400 border border-emerald-500/20 rounded">
+                                    <span className="px-3 py-1 bg-emerald-500/10 text-xs font-semibold text-emerald-400 border border-emerald-500/20 rounded-lg">
                                       Synced to Cal
                                     </span>
                                   ) : null}
@@ -1311,8 +1206,8 @@ export default function Dashboard({
                         </div>
 
                         {/* Sync focus sessions to Google calendar link */}
-                        <div className="pt-2 flex justify-between items-center text-[10px] font-mono">
-                          <span className="text-slate-500">Calendar Integration</span>
+                        <div className="pt-4 flex justify-between items-center text-xs font-semibold text-white/40">
+                          <span>Calendar Integration</span>
                           <button
                             onClick={() => {
                               if (!user && onSyncCalendarPress) {
@@ -1321,32 +1216,32 @@ export default function Dashboard({
                                 onNavigate("insights");
                               }
                             }}
-                            className="text-emerald-400 hover:text-emerald-300 transition flex items-center gap-1 font-bold"
+                            className="text-white hover:text-white/80 transition-colors flex items-center gap-1 font-semibold underline underline-offset-4"
                           >
-                            Synchronize Focus Sessions to Google Calendar &rarr;
+                            Synchronize Sessions to Google Calendar &rarr;
                           </button>
                         </div>
 
                       </div>
                     ) : (
-                      <div className="p-5 bg-[#0b1220]/50 border border-dashed border-white/8 rounded-2xl text-center space-y-3.5">
-                        <Compass size={22} className="mx-auto text-slate-500" />
+                      <div className="p-8 bg-white/5 border border-dashed border-white/20 rounded-2xl text-center space-y-4">
+                        <Compass size={28} className="mx-auto text-white/40" />
                         <div>
-                          <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wide block">Roadmap Not Structured</span>
-                          <p className="text-[11px] text-slate-500 leading-normal max-w-xs mx-auto mt-0.5 font-light">
+                          <span className="text-sm font-semibold text-white uppercase tracking-widest block">No Roadmap Yet</span>
+                          <p className="text-sm text-white/60 leading-relaxed max-w-sm mx-auto mt-2 font-light">
                             Let the AI Coach break this project's remaining hours down into step-by-step paced focus intervals ahead of your deadline.
                           </p>
                         </div>
                         <button
                           onClick={() => handleGeneratePlanForTask(selectedNodeData.original)}
                           disabled={generatingTaskId === selectedNodeData.id}
-                          className="px-4 py-2 bg-emerald-400 text-[#050816] font-mono text-xs rounded-xl hover:bg-[#10b981] cursor-pointer font-bold transition inline-flex items-center gap-1.5"
+                          className="px-6 py-2.5 mt-4 bg-white text-black font-semibold text-sm rounded-full hover:bg-gray-200 cursor-pointer transition-colors inline-flex items-center gap-2"
                         >
                           {generatingTaskId === selectedNodeData.id ? (
                             <>Calculating Roadmap...</>
                           ) : (
                             <>
-                              <Zap size={11} strokeWidth={2.5} /> Generate AI Recovery Roadmap
+                              <Zap size={14} /> Generate Action Plan
                             </>
                           )}
                         </button>
@@ -1369,14 +1264,14 @@ export default function Dashboard({
       {/* =======================================
           SECONDARY COLLAPSIBLE HUD (DETAILED HISTORIC INSIGHTS)
           ======================================= */}
-      <div className="border-t border-white/8 pt-4">
+      <div className="border-t border-white/5 pt-6 mt-8">
         <div className="flex justify-center">
           <button
             onClick={() => setShowSecondaryDetails(!showSecondaryDetails)}
-            className="px-3.5 py-1 bg-[#0b1220] hover:bg-[#0b1220]/85 border border-white/8 hover:border-emerald-500/20 text-[9.5px] font-mono rounded-lg text-slate-400 hover:text-white transition cursor-pointer flex items-center gap-1.5 font-bold"
+            className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold rounded-full text-white/60 hover:text-white transition-colors cursor-pointer flex items-center gap-2"
           >
-            {showSecondaryDetails ? "Collapse Habit Diagnostics" : "Expand Habit Diagnostics & Historical Logs"}
-            <span className={`w-1.5 h-1.5 rounded-full bg-emerald-400 ${showSecondaryDetails ? "" : "animate-ping"}`} />
+            {showSecondaryDetails ? "Hide Diagnostics" : "Show Habit Diagnostics"}
+            <ChevronRight size={14} className={`transition-transform ${showSecondaryDetails ? "rotate-90" : ""}`} />
           </button>
         </div>
 
@@ -1384,21 +1279,21 @@ export default function Dashboard({
           <motion.div 
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 pt-1 overflow-hidden"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 overflow-hidden"
           >
             {/* diagnostic 1 */}
-            <div className="bg-[#0b1220] border border-white/8 p-4 rounded-xl shadow-lg space-y-3">
-              <h3 className="text-[11px] font-mono font-medium text-slate-400 tracking-wider mb-2.5 flex items-center gap-1.5 border-b border-white/8 pb-2 uppercase">
-                <UserCheck size={13} className="text-emerald-400" /> Dynamic My Habits Analysis
+            <div className="bg-[#111111] border border-white/5 p-6 rounded-2xl shadow-sm space-y-4">
+              <h3 className="text-xs font-semibold text-white/40 tracking-widest flex items-center gap-2 border-b border-white/5 pb-4 uppercase">
+                <UserCheck size={16} className="text-white/60" /> Dynamic Habits Analysis
               </h3>
               
               {loading ? (
-                <div className="space-y-2">
-                  <div className="h-10 bg-white/[0.03] rounded animate-pulse" />
-                  <div className="h-10 bg-white/[0.02] rounded animate-pulse" />
+                <div className="space-y-3">
+                  <div className="h-12 bg-white/5 rounded-xl animate-pulse" />
+                  <div className="h-12 bg-white/5 rounded-xl animate-pulse" />
                 </div>
               ) : reflection && reflection.insights && reflection.insights.length > 0 ? (
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {reflection.insights.map((insight, idx) => {
                     const labelColor = insight.category === "advantage" 
                       ? "text-emerald-400" 
@@ -1406,11 +1301,11 @@ export default function Dashboard({
                         ? "text-red-400" 
                         : "text-amber-500";
                     return (
-                      <div key={idx} className="p-2.5 bg-slate-950/40 rounded-lg border border-white/8 space-y-0.5 text-left">
-                        <div className={`font-mono text-[9px] font-bold ${labelColor} uppercase`}>
+                      <div key={idx} className="p-4 bg-white/5 rounded-xl border border-white/10 space-y-1 text-left">
+                        <div className={`text-xs font-bold ${labelColor} uppercase tracking-widest`}>
                            {insight.title}
                         </div>
-                        <p className="text-[10.5px] text-slate-400 font-light leading-relaxed font-sans">
+                        <p className="text-sm text-white/60 font-light leading-relaxed">
                           {insight.description}
                         </p>
                       </div>
@@ -1418,15 +1313,15 @@ export default function Dashboard({
                   })}
                   
                   {reflection.workloadTrends && (
-                    <div className="pt-2 text-[9px] font-mono text-slate-500 leading-normal border-t border-white/8 text-left">
-                      <span className="text-slate-400 block pb-0.5">Progress trend index:</span>
+                    <div className="pt-4 text-xs font-semibold text-white/40 leading-relaxed border-t border-white/5 text-left">
+                      <span className="text-white/60 block mb-1">Progress trend index:</span>
                       "{reflection.workloadTrends}"
                     </div>
                   )}
                 </div>
               ) : (
                 <div className="space-y-3 text-left">
-                  <p className="text-[11px] text-slate-500 font-light italic">
+                  <p className="text-sm text-white/50 font-light italic leading-relaxed">
                     Log some milestones and work habits to unlock custom behavioral predictions.
                   </p>
                 </div>
@@ -1434,21 +1329,21 @@ export default function Dashboard({
             </div>
 
             {/* diagnostic 2 */}
-            <div className="bg-[#0b1220] border border-white/8 p-4 rounded-xl shadow-lg text-left space-y-3">
-              <h3 className="text-[11px] font-mono font-medium text-slate-400 tracking-wider mb-2.5 flex items-center gap-1.5 border-b border-white/8 pb-2 uppercase">
-                <TrendingUp size={13} className="text-emerald-400" /> Portfolio Category Load
+            <div className="bg-[#111111] border border-white/5 p-6 rounded-2xl shadow-sm text-left space-y-4">
+              <h3 className="text-xs font-semibold text-white/40 tracking-widest flex items-center gap-2 border-b border-white/5 pb-4 uppercase">
+                <TrendingUp size={16} className="text-white/60" /> Portfolio Category Load
               </h3>
               
-              <div className="space-y-2.5">
+              <div className="space-y-4">
                 {categoryStats.map((cat) => (
-                  <div key={cat.name} className="space-y-1">
-                    <div className="flex items-center justify-between text-[11px] font-mono">
-                      <span className="text-slate-400">{cat.name}</span>
-                      <span className="text-slate-350 font-bold">{cat.total} task{cat.total === 1 ? "" : "s"} ({cat.percent}%)</span>
+                  <div key={cat.name} className="space-y-2">
+                    <div className="flex items-center justify-between text-xs font-semibold text-white/60">
+                      <span>{cat.name}</span>
+                      <span className="text-white">{cat.total} task{cat.total === 1 ? "" : "s"} ({cat.percent}%)</span>
                     </div>
-                    <div className="h-1 bg-slate-950 rounded-full overflow-hidden border border-white/8">
+                    <div className="h-2 bg-white/10 rounded-full overflow-hidden border border-white/5">
                       <div 
-                        className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-500" 
+                        className="h-full bg-white rounded-full transition-all duration-500" 
                         style={{ width: `${cat.percent}%` }}
                       />
                     </div>
@@ -1458,18 +1353,18 @@ export default function Dashboard({
             </div>
 
             {/* diagnostic 3 */}
-            <div className="bg-[#0b1220] border border-white/8 p-4 rounded-xl shadow-lg text-left space-y-3">
-              <h3 className="text-[11px] font-mono font-medium text-slate-400 tracking-wider mb-2.5 flex items-center gap-1.5 border-b border-white/8 pb-2 uppercase">
-                <CheckCircle2 size={12} className="text-emerald-400" /> Logged Milestones
+            <div className="bg-[#111111] border border-white/5 p-6 rounded-2xl shadow-sm text-left space-y-4">
+              <h3 className="text-xs font-semibold text-white/40 tracking-widest flex items-center gap-2 border-b border-white/5 pb-4 uppercase">
+                <CheckCircle2 size={16} className="text-white/60" /> Logged Milestones
               </h3>
-              <div className="space-y-1.5 max-h-[170px] overflow-y-auto no-scrollbar">
+              <div className="space-y-2 max-h-[200px] overflow-y-auto no-scrollbar">
                 {completedTasks.length === 0 ? (
-                  <p className="text-[11px] text-slate-500 font-light italic leading-normal">No completed milestones recorded yet in this session.</p>
+                  <p className="text-sm text-white/50 font-light italic leading-relaxed">No completed milestones recorded yet in this session.</p>
                 ) : (
                   completedTasks.map(t => (
-                    <div key={t.id} className="flex items-center gap-2 p-1.5 bg-slate-950/40 rounded-lg border border-white/8">
-                      <CheckCircle2 size={11} className="text-emerald-400 shrink-0" />
-                      <span className="text-[10.5px] text-slate-400 truncate line-through font-mono">{t.title}</span>
+                    <div key={t.id} className="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/10">
+                      <CheckCircle2 size={16} className="text-white/40 shrink-0" />
+                      <span className="text-sm text-white/60 truncate line-through">{t.title}</span>
                     </div>
                   ))
                 )}

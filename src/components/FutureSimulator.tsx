@@ -154,14 +154,13 @@ export default function FutureSimulator({ tasks, initialSimulation, onSaveSimula
     <div id="future-simulator-view" className="space-y-8 pb-16">
       
       {/* Intro Banner */}
-      <div className="bg-[#0b1220] border border-white/8 p-8 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="space-y-3 max-w-xl z-10 text-left">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-950/40 text-emerald-400 border border-emerald-800/25 text-[10px] font-mono rounded-full uppercase tracking-wider font-semibold">
-            <Activity size={11} /> What-If Simulator
+      <div className="bg-[#111111] border border-white/5 p-8 md:p-10 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-sm">
+        <div className="space-y-4 max-w-xl z-10 text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-semibold text-white/60 uppercase tracking-widest">
+            <Activity size={14} className="text-white/40" /> What-If Simulator
           </div>
-          <h1 className="text-3xl font-sans font-bold text-white tracking-tight">What Happens If I Delay?</h1>
-          <p className="text-base text-slate-355 leading-relaxed font-normal tracking-normal">
+          <h1 className="text-3xl md:text-4xl font-display font-semibold text-white tracking-tight">What Happens If I Delay?</h1>
+          <p className="text-base text-white/50 leading-relaxed font-light">
             See the real-time consequence of procrastinating. Drag the slider to choose your delay in days and preview how your completion trajectory changes.
           </p>
         </div>
@@ -186,11 +185,11 @@ export default function FutureSimulator({ tasks, initialSimulation, onSaveSimula
       </div>
 
       {tasks.length === 0 ? (
-        <div className="bg-[#0b1220] border border-dashed border-white/8 p-12 text-center rounded-2xl max-w-lg mx-auto space-y-4">
-          <Activity size={32} className="mx-auto text-slate-500 animate-pulse" />
+        <div className="bg-[#111111] border border-dashed border-white/10 p-12 text-center rounded-2xl max-w-xl mx-auto space-y-4 shadow-sm">
+          <Activity size={48} className="mx-auto text-white/20 mb-2" />
           <div>
-            <h4 className="text-sm font-semibold text-white">No active tasks to simulate</h4>
-            <p className="text-xs mt-1 leading-relaxed text-slate-400">
+            <h4 className="text-xl font-display font-semibold text-white">No active tasks to simulate</h4>
+            <p className="text-sm mt-2 leading-relaxed text-white/50 font-light">
               Create an assignment or project task first to simulate delay outcomes.
             </p>
           </div>
@@ -199,26 +198,26 @@ export default function FutureSimulator({ tasks, initialSimulation, onSaveSimula
         <div className="space-y-8">
           
           {/* Main Simulation Panel containing the slider and progress bars */}
-          <div className="bg-[#0b1220] border border-white/8 p-6 rounded-2xl space-y-8">
+          <div className="bg-[#161616] border border-white/5 p-8 md:p-10 rounded-2xl space-y-10 shadow-sm">
             
             {/* Delay Slider Selection */}
-            <div className="space-y-4 max-w-xl mx-auto text-center">
-              <label className="block text-lg font-sans font-bold text-slate-200">
+            <div className="space-y-6 max-w-2xl mx-auto text-center">
+              <label className="block text-xl font-display font-semibold text-white">
                 Choose how many days you want to delay:
               </label>
-              <div className="flex items-center justify-between gap-5 py-2">
-                <span className="text-sm font-mono text-slate-400 min-w-[80px] text-left">0 days (Now)</span>
+              <div className="flex items-center justify-between gap-6 py-4">
+                <span className="text-xs font-semibold text-white/40 uppercase tracking-widest min-w-[80px] text-left">Now</span>
                 <input
                   type="range"
                   min="0"
                   max="7"
                   value={delayDays}
                   onChange={(e) => setDelayDays(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-400"
+                  className="w-full h-2 bg-white/10 rounded-full appearance-none cursor-pointer accent-white hover:accent-gray-300 focus:outline-none focus:ring-4 focus:ring-white/20 transition-all"
                 />
-                <span className="text-sm font-mono text-slate-400 min-w-[80px] text-right">7 days (1 Week)</span>
+                <span className="text-xs font-semibold text-white/40 uppercase tracking-widest min-w-[80px] text-right">1 Week</span>
               </div>
-              <div className="text-base font-mono text-emerald-400 font-bold bg-emerald-950/15 py-3 px-6 rounded-xl border border-emerald-900/20 inline-block uppercase tracking-wider">
+              <div className="text-sm font-semibold text-white bg-white/5 py-4 px-8 rounded-full border border-white/10 inline-block tracking-wide">
                 Delay Selected: {delayDays} {delayDays === 1 ? "Day" : "Days"}
               </div>
             </div>
@@ -235,50 +234,49 @@ export default function FutureSimulator({ tasks, initialSimulation, onSaveSimula
 
             {/* Bold Callout Student Friendly Warning Banner */}
             {delayDays > 3 ? (
-              <div className="space-y-4 max-w-3xl mx-auto">
+              <div className="space-y-4 max-w-4xl mx-auto">
                 <motion.div 
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4 }}
-                  className="bg-red-500/10 border border-red-500/40 p-6 rounded-2xl flex items-start gap-3.5 text-left select-none relative overflow-hidden shadow-[0_0_20px_rgba(239,68,68,0.08)]"
+                  className="bg-red-500/5 border border-red-500/20 p-8 rounded-2xl flex items-start gap-4 text-left select-none relative overflow-hidden shadow-sm"
                 >
-                  <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-red-500/35 to-transparent" />
-                  <div className="p-2 bg-red-950/40 border border-red-500/35 text-red-400 rounded-xl shrink-0 mt-0.5">
-                    <ShieldAlert size={20} className="animate-pulse text-red-400" />
+                  <div className="p-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-2xl shrink-0 mt-1">
+                    <ShieldAlert size={24} className="text-red-400" />
                   </div>
-                  <div className="space-y-2 text-left">
-                    <h4 className="text-[10px] font-mono font-bold text-red-400 tracking-wider flex items-center gap-1.5 uppercase">
+                  <div className="space-y-3 text-left">
+                    <h4 className="text-xs font-semibold text-red-400 tracking-widest flex items-center gap-2 uppercase">
                       🚨 Extreme Path Compression
                     </h4>
-                    <p className="text-base text-red-100 leading-relaxed font-bold">
+                    <p className="text-lg text-white/90 leading-relaxed font-semibold">
                       Waiting 3 more days could reduce your completion chance from 92% to 54%.
                     </p>
-                    <p className="text-sm text-slate-300 leading-relaxed font-normal tracking-normal">
-                      If you delay <span className="text-red-400 font-bold underline underline-offset-4 font-mono">{delayDays} days</span>, your stress score jumps to <span className="text-red-400 font-bold underline underline-offset-4 font-mono">{stressScoreWithDelay}%</span> and you will miss <span className="text-red-400 font-bold underline underline-offset-4 font-mono">{missedDeadlinesWithDelay}</span> {missedDeadlinesWithDelay === 1 ? "deadline" : "deadlines"}.
+                    <p className="text-base text-white/60 leading-relaxed font-light">
+                      If you delay <span className="text-white font-semibold underline underline-offset-4">{delayDays} days</span>, your stress score jumps to <span className="text-red-400 font-semibold">{stressScoreWithDelay}%</span> and you will miss <span className="text-red-400 font-semibold">{missedDeadlinesWithDelay}</span> {missedDeadlinesWithDelay === 1 ? "deadline" : "deadlines"}.
                     </p>
                   </div>
                 </motion.div>
               </div>
             ) : delayDays > 0 ? (
-              <div className="bg-red-500/5 border border-red-500/15 max-w-3xl mx-auto p-6 rounded-2xl flex items-start gap-3.5 text-left select-none">
-                <div className="p-2 bg-red-950/30 border border-red-800/20 text-red-500 rounded-xl shrink-0 mt-0.5">
-                  <Flame size={18} className="fill-red-500 text-red-400 animate-pulse" />
+              <div className="bg-red-500/5 border border-red-500/20 max-w-4xl mx-auto p-8 rounded-2xl flex items-start gap-4 text-left select-none shadow-sm">
+                <div className="p-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-2xl shrink-0 mt-1">
+                  <Flame size={24} className="text-red-400" />
                 </div>
-                <div className="space-y-2 text-left">
-                  <h4 className="text-[10px] font-mono font-bold text-red-400 tracking-wider uppercase">Delay Warning</h4>
-                  <p className="text-base text-slate-200 leading-relaxed font-semibold tracking-normal">
-                    "If you delay <span className="text-red-400 font-bold underline underline-offset-4 font-mono">{delayDays} {delayDays === 1 ? "day" : "days"}</span>, your stress score jumps to <span className="text-red-400 font-bold underline underline-offset-4 font-mono">{stressScoreWithDelay}%</span> and you will miss <span className="text-red-400 font-bold underline underline-offset-4 font-mono">{missedDeadlinesWithDelay}</span> {missedDeadlinesWithDelay === 1 ? "deadline" : "deadlines"}."
+                <div className="space-y-3 text-left">
+                  <h4 className="text-xs font-semibold text-red-400 tracking-widest uppercase">Delay Warning</h4>
+                  <p className="text-base text-white/80 leading-relaxed font-light">
+                    "If you delay <span className="text-white font-semibold underline underline-offset-4">{delayDays} {delayDays === 1 ? "day" : "days"}</span>, your stress score jumps to <span className="text-red-400 font-semibold">{stressScoreWithDelay}%</span> and you will miss <span className="text-red-400 font-semibold">{missedDeadlinesWithDelay}</span> {missedDeadlinesWithDelay === 1 ? "deadline" : "deadlines"}."
                   </p>
                 </div>
               </div>
             ) : (
-              <div className="bg-emerald-500/5 border border-emerald-500/15 max-w-3xl mx-auto p-6 rounded-2xl flex items-start gap-3.5 text-left select-none">
-                <div className="p-2 bg-emerald-950/30 border border-emerald-800/20 text-emerald-400 rounded-xl shrink-0 mt-0.5">
-                  <ShieldCheck size={18} />
+              <div className="bg-emerald-500/5 border border-emerald-500/20 max-w-4xl mx-auto p-8 rounded-2xl flex items-start gap-4 text-left select-none shadow-sm">
+                <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-2xl shrink-0 mt-1">
+                  <ShieldCheck size={24} />
                 </div>
-                <div className="space-y-2 text-left">
-                  <h4 className="text-[10px] font-mono font-bold text-emerald-400 tracking-wider uppercase">Secure Progress</h4>
-                  <p className="text-base text-slate-200 leading-relaxed font-normal tracking-normal">
+                <div className="space-y-3 text-left">
+                  <h4 className="text-xs font-semibold text-emerald-400 tracking-widest uppercase">Secure Progress</h4>
+                  <p className="text-base text-white/80 leading-relaxed font-light">
                     Starting on time keeps your stress level super low ({stressScoreWithDelay}%) and completely guarantees that you finish all your school work on time. No missed deadlines!
                   </p>
                 </div>
@@ -286,12 +284,13 @@ export default function FutureSimulator({ tasks, initialSimulation, onSaveSimula
             )}
 
             {/* Impacted Deadlines Breakdown to Highlight Missed Deadlines */}
-            <div className="mt-8 border-t border-white/[0.04] pt-8 max-w-3xl mx-auto text-left">
-              <h4 className="text-sm font-mono font-bold text-slate-400 tracking-wider mb-5 flex items-center gap-1.5 uppercase">
-                <AlertTriangle size={15} className={delayDays > 3 ? "text-red-400 animate-bounce" : "text-slate-500"} /> 
+            {/* Impacted Deadlines Breakdown to Highlight Missed Deadlines */}
+            <div className="mt-10 border-t border-white/5 pt-10 max-w-4xl mx-auto text-left">
+              <h4 className="text-sm font-semibold text-white/40 tracking-widest mb-6 flex items-center gap-2 uppercase">
+                <AlertTriangle size={16} className={delayDays > 3 ? "text-red-400 animate-bounce" : "text-white/60"} /> 
                 Task Portfolio Deadline Impact
               </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {activeTasks.map((task, idx) => {
                   const isMissed = idx < missedDeadlinesWithDelay;
                   return (
@@ -302,46 +301,43 @@ export default function FutureSimulator({ tasks, initialSimulation, onSaveSimula
                         x: [0, -3, 3, -3, 3, 0],
                         borderColor: "rgba(239, 68, 68, 0.45)",
                         backgroundColor: "rgba(239, 68, 68, 0.05)",
-                        boxShadow: "0 0 15px rgba(239, 68, 68, 0.08)"
                       } : isMissed ? {
                         x: 0,
                         borderColor: "rgba(239, 68, 68, 0.2)",
                         backgroundColor: "rgba(239, 68, 68, 0.02)",
-                        boxShadow: "none"
                       } : {
                         x: 0,
-                        borderColor: "rgba(255, 255, 255, 0.04)",
-                        backgroundColor: "rgba(255, 255, 255, 0.01)",
-                        boxShadow: "none"
+                        borderColor: "rgba(255, 255, 255, 0.05)",
+                        backgroundColor: "rgba(255, 255, 255, 0.02)",
                       }}
                       transition={isMissed && delayDays > 3 ? {
                         x: { repeat: Infinity, repeatType: "mirror", duration: 0.35, repeatDelay: 3 },
                         borderColor: { duration: 0.3 },
                         backgroundColor: { duration: 0.3 }
                       } : { duration: 0.3 }}
-                      className="border border-white/8 p-5 rounded-xl relative overflow-hidden flex flex-col justify-between min-h-[120px]"
+                      className="border border-white/10 p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[140px] shadow-sm"
                     >
-                      <div className="space-y-1.5">
-                        <div className="flex items-start justify-between gap-2.5">
-                          <span className="text-sm font-semibold text-white line-clamp-1 text-left">{task.title}</span>
+                      <div className="space-y-2">
+                        <div className="flex items-start justify-between gap-3">
+                          <span className="text-base font-semibold text-white line-clamp-1 text-left">{task.title}</span>
                           {isMissed ? (
-                            <span className={`text-[9px] font-mono font-bold px-1.5 py-0.5 rounded shrink-0 ${delayDays > 3 ? "bg-red-500/20 border border-red-500/30 text-red-400 animate-pulse" : "bg-red-950/20 border border-red-900/30 text-red-400"}`}>
-                              ⚠️ MISSED
+                            <span className={`text-[10px] font-semibold px-2 py-1 rounded shrink-0 uppercase tracking-widest ${delayDays > 3 ? "bg-red-500/10 border border-red-500/20 text-red-400 animate-pulse" : "bg-red-500/5 border border-red-500/10 text-red-400"}`}>
+                              ⚠️ Missed
                             </span>
                           ) : (
-                            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 bg-emerald-950/20 border border-emerald-900/30 text-emerald-400 shrink-0">
-                              ✓ ON TIME
+                            <span className="text-[10px] font-semibold px-2 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 shrink-0 uppercase tracking-widest rounded">
+                              ✓ On Time
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-slate-350 font-normal text-left">
-                          Effort required: <span className="font-mono text-slate-300 font-semibold">{task.estimatedHours} hours</span>
+                        <p className="text-sm text-white/50 font-light text-left">
+                          Effort required: <span className="text-white/80 font-medium">{task.estimatedHours} hours</span>
                         </p>
                       </div>
-                      <div className="mt-3 flex items-center justify-between text-[10px] font-mono text-slate-400 border-t border-white/[0.04] pt-2">
+                      <div className="mt-4 flex items-center justify-between text-xs font-medium text-white/40 border-t border-white/5 pt-4">
                         <span>Due: {task.deadline}</span>
                         {isMissed && delayDays > 3 && (
-                          <span className="text-red-400 font-semibold animate-pulse">Critical Overload</span>
+                          <span className="text-red-400 font-bold animate-pulse">Critical Overload</span>
                         )}
                       </div>
                     </motion.div>
@@ -358,82 +354,82 @@ export default function FutureSimulator({ tasks, initialSimulation, onSaveSimula
               <div className="flex justify-center">
                 <button
                   onClick={() => setShowDetailed(!showDetailed)}
-                  className="px-5 py-3 bg-[#0b1220] hover:bg-slate-950 border border-white/8 hover:border-emerald-500/30 text-sm font-mono rounded-xl text-slate-300 hover:text-white transition cursor-pointer flex items-center gap-2 font-bold uppercase tracking-wider"
+                  className="px-6 py-2.5 bg-[#111111] hover:bg-white/5 border border-white/10 text-xs font-semibold rounded-full text-white/60 hover:text-white transition-colors flex items-center gap-2"
                 >
                   {showDetailed ? "Hide Details" : "Show Details"}
                 </button>
               </div>
 
               {showDetailed && (
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
                   {/* Left: summary box */}
-                  <div className="lg:col-span-8 bg-[#0b1220] p-8 rounded-2xl border border-white/8 space-y-4 text-left">
-                    <span className="text-[10px] text-slate-450 font-mono uppercase tracking-wider block font-bold flex items-center gap-1">
-                      <Info size={11} className="text-emerald-400" /> Comparison Review
+                  <div className="lg:col-span-8 bg-[#111111] p-8 md:p-10 rounded-2xl border border-white/5 space-y-6 text-left shadow-sm">
+                    <span className="text-xs text-white/40 font-semibold uppercase tracking-widest flex items-center gap-2">
+                      <Info size={14} className="text-white/60" /> Comparison Review
                     </span>
-                    <p className="text-base text-slate-200 leading-relaxed font-normal pl-4 border-l-2 border-emerald-500/30 font-sans">
+                    <p className="text-lg text-white/80 leading-relaxed font-light pl-4 border-l border-emerald-500/30">
                       {simulation.comparisonSummary}
                     </p>
                   </div>
 
                   {/* Right: Default Trajectories Outcome Cards */}
-                  <div className="lg:col-span-4 space-y-6 font-sans">
+                  <div className="lg:col-span-4 space-y-6">
                     {/* Default */}
-                    <div className="bg-[#0b1220] border border-white/8 rounded-2xl p-6 space-y-4 text-left">
-                      <div className="flex items-center gap-2.5">
-                        <div className="p-2 bg-red-950/20 border border-red-500/15 rounded-lg text-red-400">
-                          <TrendingDown size={15} />
+                    <div className="bg-[#111111] border border-white/5 rounded-2xl p-8 space-y-6 text-left shadow-sm">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400">
+                          <TrendingDown size={18} />
                         </div>
-                        <h4 className="text-base font-sans font-bold text-red-400 tracking-tight">
+                        <h4 className="text-lg font-display font-semibold text-red-400">
                           {simulation.currentTrajectory.name}
                         </h4>
                       </div>
 
-                      <div className="space-y-2 border-b border-white/8 pb-3 text-sm font-mono">
+                      <div className="space-y-3 border-b border-white/5 pb-4 text-sm font-semibold text-white/40">
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-450">Estimated work done</span>
-                          <span className="text-slate-100 font-bold">{simulation.currentTrajectory.finalProgress}%</span>
+                          <span>Estimated work done</span>
+                          <span className="text-white">{simulation.currentTrajectory.finalProgress}%</span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-455">Success rate</span>
-                          <span className="text-red-400 font-bold">{simulation.currentTrajectory.successProbability}%</span>
+                          <span>Success rate</span>
+                          <span className="text-red-400">{simulation.currentTrajectory.successProbability}%</span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-455">Peak daily time</span>
-                          <span className="text-slate-100 font-bold">{simulation.currentTrajectory.dailyCommitmentHours}h</span>
+                          <span>Peak daily time</span>
+                          <span className="text-white">{simulation.currentTrajectory.dailyCommitmentHours}h</span>
                         </div>
                       </div>
-                      <p className="text-sm text-slate-350 leading-relaxed font-normal">
+                      <p className="text-sm text-white/50 leading-relaxed font-light">
                         {simulation.currentTrajectory.description}
                       </p>
                     </div>
 
                     {/* Safe */}
-                    <div className="bg-[#0b1220] border border-emerald-500/20 rounded-2xl p-6 space-y-4 text-left">
-                      <div className="flex items-center gap-2.5">
-                        <div className="p-2 bg-emerald-950/20 border border-emerald-500/15 rounded-lg text-emerald-400">
-                          <TrendingUp size={15} />
+                    <div className="bg-[#111111] border border-emerald-500/20 rounded-2xl p-8 space-y-6 text-left shadow-sm">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-400">
+                          <TrendingUp size={18} />
                         </div>
-                        <h4 className="text-base font-sans font-bold text-emerald-400 tracking-tight">
+                        <h4 className="text-lg font-display font-semibold text-emerald-400">
                           {simulation.recoveryTrajectory.name}
                         </h4>
                       </div>
 
-                      <div className="space-y-2 border-b border-white/8 pb-3 text-sm font-mono">
+                      <div className="space-y-3 border-b border-white/5 pb-4 text-sm font-semibold text-white/40">
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-455">Estimated work done</span>
-                          <span className="text-slate-100 font-bold">{simulation.recoveryTrajectory.finalProgress}%</span>
+                          <span>Estimated work done</span>
+                          <span className="text-white">{simulation.recoveryTrajectory.finalProgress}%</span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-455">Success rate</span>
-                          <span className="text-emerald-400 font-bold">{simulation.recoveryTrajectory.successProbability}%</span>
+                          <span>Success rate</span>
+                          <span className="text-emerald-400">{simulation.recoveryTrajectory.successProbability}%</span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-455">Steady daily time</span>
-                          <span className="text-slate-100 font-bold">{simulation.recoveryTrajectory.dailyCommitmentHours}h</span>
+                          <span>Steady daily time</span>
+                          <span className="text-white">{simulation.recoveryTrajectory.dailyCommitmentHours}h</span>
                         </div>
                       </div>
-                      <p className="text-sm text-slate-300 leading-relaxed font-normal">
+                      <p className="text-sm text-white/50 leading-relaxed font-light">
                         {simulation.recoveryTrajectory.description}
                       </p>
                     </div>

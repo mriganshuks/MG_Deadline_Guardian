@@ -254,28 +254,27 @@ export default function RecoveryPlanner({
     <div id="recovery-planner-view" className="space-y-8 pb-16">
       
       {/* Top Banner Overview */}
-      <div className="bg-[#0b1220] border border-white/8 p-8 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden text-left">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="space-y-3 max-w-xl z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-950/40 text-emerald-400 border border-emerald-900/25 text-[10px] font-mono rounded-full uppercase tracking-wider font-semibold">
-            <Compass size={11} /> Action Steps
+      <div className="bg-[#111111] border border-white/5 p-8 md:p-10 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-8 text-left shadow-sm">
+        <div className="space-y-4 max-w-xl z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-semibold text-white/60 uppercase tracking-widest">
+            <Compass size={14} className="text-white/40" /> Action Steps
           </div>
-          <h1 className="text-3xl font-sans font-bold text-white tracking-tight">Step-by-Step Action Plans</h1>
-          <p className="text-base text-slate-355 leading-relaxed font-normal tracking-normal">
+          <h1 className="text-3xl md:text-4xl font-display font-semibold text-white tracking-tight">Step-by-Step Action Plans</h1>
+          <p className="text-base text-white/50 leading-relaxed font-light">
             Break down your big deadlines into small, manageable focus sessions. If you fall behind or miss a session, recalculate your plan to easily catch up without the stress.
           </p>
         </div>
         
-        <div className="flex gap-4 shrink-0 font-mono text-center">
-          <div className="px-5 py-4 bg-slate-950/40 border border-white/8 rounded-xl min-w-[110px]">
-            <span className="text-[10px] text-slate-400 block tracking-wider uppercase font-semibold">Focus sessions</span>
-            <span className="text-2xl font-bold text-emerald-400 block mt-1">
+        <div className="flex gap-4 shrink-0 text-center">
+          <div className="px-6 py-5 bg-[#161616] border border-white/5 rounded-2xl min-w-[120px] shadow-sm">
+            <span className="text-xs text-white/40 block tracking-widest uppercase font-semibold">Focus sessions</span>
+            <span className="text-3xl font-display font-semibold text-emerald-400 block mt-2">
               {tasks.filter(t => t.recoveryPlan).reduce((acc, t) => acc + (t.recoveryPlan?.sessions.length || 0), 0)}
             </span>
           </div>
-          <div className="px-5 py-4 bg-slate-950/40 border border-white/8 rounded-xl min-w-[110px]">
-            <span className="text-[10px] text-slate-400 block tracking-wider uppercase font-semibold">Missed steps</span>
-            <span className="text-2xl font-bold text-red-400 block mt-1">
+          <div className="px-6 py-5 bg-[#161616] border border-white/5 rounded-2xl min-w-[120px] shadow-sm">
+            <span className="text-xs text-white/40 block tracking-widest uppercase font-semibold">Missed steps</span>
+            <span className="text-3xl font-display font-semibold text-red-400 block mt-2">
               {tasks.reduce((acc, t) => acc + (t.missedMilestonesCount || 0), 0)}
             </span>
           </div>
@@ -290,21 +289,21 @@ export default function RecoveryPlanner({
       )}
 
       {activeTasks.length === 0 ? (
-        <div className="bg-[#0b1220] border border-dashed border-white/8 p-12 text-center rounded-2xl max-w-lg mx-auto space-y-4">
-          <ShieldCheck size={38} className="mx-auto text-emerald-400 mb-2" />
-          <h3 className="text-lg font-sans font-bold text-white">All Commitments Fully Secured</h3>
-          <p className="text-base text-slate-355 font-normal leading-relaxed">Paced action blocks are completed. Trajectory stays balanced.</p>
+        <div className="bg-[#111111] border border-dashed border-white/10 p-12 text-center rounded-2xl max-w-xl mx-auto space-y-4 shadow-sm">
+          <ShieldCheck size={48} className="mx-auto text-emerald-400/50 mb-2" />
+          <h3 className="text-xl font-display font-semibold text-white">All Commitments Fully Secured</h3>
+          <p className="text-sm text-white/50 font-light leading-relaxed">Paced action blocks are completed. Trajectory stays balanced.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           {/* Active Tasks Menu sidebar selection */}
-          <div className="bg-[#0b1220] border border-white/8 rounded-2xl p-4 lg:col-span-4 space-y-3 h-fit text-left">
-            <div className="text-xs font-mono font-bold text-slate-400 tracking-wider px-2 pb-2 border-b border-white/8 uppercase">
+          <div className="bg-[#111111] border border-white/5 rounded-2xl p-6 lg:col-span-4 space-y-4 h-fit text-left shadow-sm">
+            <div className="text-xs font-semibold text-white/40 tracking-widest px-2 pb-3 border-b border-white/5 uppercase">
               Select Task
             </div>
 
-            <div className="space-y-1.5 max-h-[420px] overflow-y-auto no-scrollbar">
+            <div className="space-y-2 max-h-[420px] overflow-y-auto no-scrollbar">
               {activeTasks.map((task) => {
                 const active = task.id === selectedTaskId;
                 const hasPlan = !!task.recoveryPlan;
@@ -316,23 +315,23 @@ export default function RecoveryPlanner({
                       setSelectedTaskId(task.id);
                       setErrorMsg("");
                     }}
-                    className={`w-full text-left p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-3 text-xs ${
+                    className={`w-full text-left p-4 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-3 text-sm ${
                       active
-                        ? "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500/40"
-                        : "bg-slate-950/30 border-white/8 hover:border-emerald-500/10"
+                        ? "bg-white/5 border-white/10 shadow-sm"
+                        : "bg-transparent border-transparent hover:bg-white/[0.02]"
                     }`}
                   >
-                    <div className="space-y-1 truncate max-w-xs">
-                      <div className="font-sans font-bold text-white truncate text-[15px]">{task.title}</div>
-                      <div className="font-mono text-[9px] text-slate-500 flex items-center gap-1.5 leading-none">
+                    <div className="space-y-1.5 truncate max-w-xs">
+                      <div className="font-semibold text-white truncate text-[15px]">{task.title}</div>
+                      <div className="text-[11px] font-semibold flex items-center gap-2 leading-none uppercase tracking-wider">
                         {hasPlan ? (
-                          <span className="text-emerald-400 font-bold">● Action plan active</span>
+                          <span className="text-emerald-400 flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 block" /> Action plan active</span>
                         ) : (
-                          <span className="text-slate-500">● No plan created yet</span>
+                          <span className="text-white/40 flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-white/20 block" /> No plan created yet</span>
                         )}
                       </div>
                     </div>
-                    <ChevronRight size={14} className={active ? "text-emerald-400" : "text-slate-600"} />
+                    <ChevronRight size={16} className={active ? "text-white" : "text-white/20"} />
                   </button>
                 );
               })}
@@ -342,35 +341,34 @@ export default function RecoveryPlanner({
           {/* Main Workspace content */}
           <div className="lg:col-span-8 text-left">
             {selectedTask ? (
-              <div className="bg-[#0b1220] border border-white/8 rounded-2xl p-6 md:p-8 space-y-6 relative shadow-xl text-left font-sans">
-                <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/25 to-transparent" />
+              <div className="bg-[#111111] border border-white/5 rounded-2xl p-8 md:p-10 space-y-8 relative shadow-sm text-left">
 
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/8 pb-5 text-left">
-                  <div className="space-y-1.5 max-w-xl text-left">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[9px] text-slate-500 font-mono block">Due date and steps</span>
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 border-b border-white/5 pb-8 text-left">
+                  <div className="space-y-3 max-w-xl text-left">
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs text-white/40 font-semibold uppercase tracking-widest block">Due date and steps</span>
                       {selectedTask.missedMilestonesCount ? (
-                        <span className="px-2 py-0.5 rounded-full text-[8px] bg-red-500/10 border border-red-500/15 text-red-400 font-mono tracking-wider leading-none">
+                        <span className="px-2.5 py-1 rounded text-[10px] bg-red-500/10 border border-red-500/20 text-red-400 font-semibold uppercase tracking-widest leading-none">
                           Reschedules: {selectedTask.missedMilestonesCount}
                         </span>
                       ) : null}
                     </div>
-                    <h2 className="text-2xl font-sans font-bold text-white tracking-tight">{selectedTask.title}</h2>
-                    <p className="text-base text-slate-355 font-normal leading-relaxed mt-1.5">{selectedTask.description}</p>
+                    <h2 className="text-3xl font-display font-semibold text-white tracking-tight">{selectedTask.title}</h2>
+                    <p className="text-base text-white/60 font-light leading-relaxed mt-2">{selectedTask.description}</p>
                   </div>
 
                   {selectedTask.recoveryPlan && (
                     <button
                       onClick={handleRecalculatePlan}
                       disabled={generating}
-                      className="px-5 py-2.5 bg-slate-950 hover:bg-slate-900 border border-red-500/20 hover:border-red-500/40 text-red-400 text-sm font-mono rounded-full cursor-pointer transition flex items-center gap-2 self-start shrink-0 disabled:opacity-50 font-semibold"
+                      className="px-6 py-2.5 bg-red-500/5 hover:bg-red-500/10 border border-red-500/20 text-red-400 text-sm rounded-full cursor-pointer transition-colors flex items-center gap-2 self-start shrink-0 disabled:opacity-50 font-semibold"
                     >
                       {generating ? (
-                        <Loader2 className="animate-spin text-red-400" size={15} />
+                        <Loader2 className="animate-spin text-red-400" size={16} />
                       ) : (
-                        <RefreshCw size={13} strokeWidth={2.5} />
+                        <RefreshCw size={14} strokeWidth={2.5} />
                       )}
-                      Reschedule Remaining Steps
+                      Reschedule Steps
                     </button>
                   )}
                 </div>
@@ -378,15 +376,15 @@ export default function RecoveryPlanner({
                 {selectedTask.recoveryPlan ? (
                   <div className="space-y-6">
                                      {/* Strategy Directive Box */}
-                    <div className="bg-slate-950/40 border border-white/8 p-6 rounded-2xl space-y-3 relative text-left">
-                      <div className="text-[10px] text-emerald-400 font-mono tracking-wider block font-semibold flex items-center gap-1.5 uppercase">
-                        <Compass size={14} /> Overall Strategy
+                    <div className="bg-[#161616] border border-white/5 p-8 rounded-2xl space-y-4 relative text-left shadow-sm">
+                      <div className="text-xs text-emerald-400 tracking-widest block font-semibold flex items-center gap-2 uppercase">
+                        <Compass size={16} /> Overall Strategy
                       </div>
-                      <p className="text-base text-slate-200 font-normal leading-relaxed">
+                      <p className="text-lg text-white/80 font-light leading-relaxed">
                         {selectedTask.recoveryPlan.overallStrategy}
                       </p>
                       
-                      <div className="pt-3 flex items-center justify-between text-[10px] text-slate-500 font-mono border-t border-white/8">
+                      <div className="pt-4 flex items-center justify-between text-xs text-white/40 font-semibold uppercase tracking-widest border-t border-white/5">
                         <span>Created on: {selectedTask.recoveryPlan.rebuiltAt}</span>
                         <span>Times rescheduled: {selectedTask.recoveryPlan.recalcCount}</span>
                       </div>
@@ -394,12 +392,12 @@ export default function RecoveryPlanner({
 
                     {/* Slippage Alert Bannner */}
                     {selectedTask.recoveryPlan.sessions.some(s => s.missed) && (
-                      <div className="p-6 bg-red-950/30 border border-red-500/20 rounded-xl space-y-4 text-left">
-                        <div className="flex items-start gap-3.5">
-                          <AlertTriangle className="text-red-400 shrink-0 mt-0.5" size={18} />
-                          <div className="space-y-1">
-                            <h4 className="text-sm font-bold text-white">Feeling Behind? Let's Adjust</h4>
-                            <p className="text-sm text-slate-300 leading-relaxed font-normal">
+                      <div className="p-8 bg-red-500/5 border border-red-500/20 rounded-2xl space-y-5 text-left shadow-sm">
+                        <div className="flex items-start gap-4">
+                          <AlertTriangle className="text-red-400 shrink-0 mt-1" size={24} />
+                          <div className="space-y-2">
+                            <h4 className="text-lg font-semibold text-white">Feeling Behind? Let's Adjust</h4>
+                            <p className="text-base text-white/60 leading-relaxed font-light">
                               You missed some scheduled steps, but that's okay! We can easily recalculate your plan to spread the remaining work across your available days.
                             </p>
                           </div>
@@ -407,12 +405,12 @@ export default function RecoveryPlanner({
                         <button
                           onClick={handleRecalculatePlan}
                           disabled={generating}
-                          className="px-5 py-2.5 bg-red-950 hover:bg-red-900 text-red-400 border border-red-500/25 text-xs font-mono rounded-lg transition-all cursor-pointer flex items-center gap-1.5 disabled:opacity-50 font-semibold uppercase tracking-wider"
+                          className="px-6 py-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 text-sm rounded-full transition-colors cursor-pointer flex items-center gap-2 disabled:opacity-50 font-semibold"
                         >
                           {generating ? (
-                            <Loader2 className="animate-spin text-red-400" size={14} />
+                            <Loader2 className="animate-spin text-red-400" size={16} />
                           ) : (
-                            <RefreshCw size={13} strokeWidth={2.5} />
+                            <RefreshCw size={14} strokeWidth={2.5} />
                           )}
                           Reschedule My Remaining Work
                         </button>
@@ -421,20 +419,20 @@ export default function RecoveryPlanner({
 
                     {/* Interactive Sessions view switcher and list/stack */}
                     <div className="space-y-6 text-left">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/[0.04] pb-3">
-                        <div className="text-xs font-mono font-bold text-slate-400 tracking-wider block uppercase">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/5 pb-4">
+                        <div className="text-xs font-semibold text-white/40 tracking-widest block uppercase">
                           Your step-by-step work sessions
                         </div>
                         
                         {/* View Switcher Controls */}
-                        <div className="inline-flex rounded-lg bg-slate-950 p-1 border border-white/8">
+                        <div className="inline-flex rounded-full bg-[#161616] p-1 border border-white/5">
                           <button
                             type="button"
                             onClick={() => setViewMode('stack')}
-                            className={`px-3 py-1.5 h-[36px] flex items-center justify-center text-xs font-mono rounded-md font-bold cursor-pointer transition ${
+                            className={`px-4 py-2 h-[36px] flex items-center justify-center text-xs rounded-full font-semibold cursor-pointer transition-colors ${
                               viewMode === 'stack'
-                                ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-                                : "text-slate-450 hover:text-white"
+                                ? "bg-white/10 text-white shadow-sm"
+                                : "text-white/40 hover:text-white/80"
                             }`}
                           >
                             Swiper Stack
@@ -442,10 +440,10 @@ export default function RecoveryPlanner({
                           <button
                             type="button"
                             onClick={() => setViewMode('list')}
-                            className={`px-3 py-1.5 h-[36px] flex items-center justify-center text-xs font-mono rounded-md font-bold cursor-pointer transition ${
+                            className={`px-4 py-2 h-[36px] flex items-center justify-center text-xs rounded-full font-semibold cursor-pointer transition-colors ${
                               viewMode === 'list'
-                                ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-                                : "text-slate-450 hover:text-white"
+                                ? "bg-white/10 text-white shadow-sm"
+                                : "text-white/40 hover:text-white/80"
                             }`}
                           >
                             Scrollable List
@@ -463,66 +461,66 @@ export default function RecoveryPlanner({
                           />
                         </div>
                       ) : (
-                        <div className="space-y-3">
+                        <div className="space-y-4">
                           {selectedTask.recoveryPlan.sessions.map((session, idx) => {
                             const completed = session.completed;
                             const missed = !!session.missed;
                             const delayed = !completed && !missed && isSessionOverdue(session);
                             
-                            let cardBorder = "border-white/[0.03]";
-                            let cardBackground = "bg-white/[0.01]";
+                            let cardBorder = "border-white/5";
+                            let cardBackground = "bg-[#161616]";
                             
                             if (completed) {
-                              cardBorder = "border-emerald-500/15 bg-emerald-500/[0.02]";
+                              cardBorder = "border-emerald-500/20 bg-emerald-500/5";
                             } else if (missed) {
-                              cardBorder = "border-red-500/20 bg-red-500/[0.03]";
+                              cardBorder = "border-red-500/20 bg-red-500/5";
                             } else if (delayed) {
-                              cardBorder = "border-amber-500/15 bg-amber-500/[0.02]";
+                              cardBorder = "border-amber-500/20 bg-amber-500/5";
                             }
 
                             return (
                               <div 
                                 key={session.id}
-                                className={`p-4 border rounded-xl flex items-center justify-between gap-4 transition-all duration-200 ${cardBorder} ${cardBackground}`}
+                                className={`p-5 border rounded-2xl flex items-center justify-between gap-4 transition-all duration-200 ${cardBorder} ${cardBackground}`}
                               >
                                 <div className="flex items-start gap-4 flex-grow">
                                   {/* Toggle Checkbox button */}
                                   <button
                                     type="button"
                                     onClick={() => onToggleSession(selectedTask.id, session.id, completed ? 'pending' : 'completed')}
-                                    className="mt-0.5 text-slate-500 hover:text-emerald-400 cursor-pointer transition shrink-0"
+                                    className="mt-0.5 text-white/40 hover:text-emerald-400 cursor-pointer transition shrink-0"
                                   >
                                     {completed ? (
-                                      <CheckSquare size={17} className="text-emerald-400" />
+                                      <CheckSquare size={20} className="text-emerald-400" />
                                     ) : (
-                                      <Square size={17} className="text-white/[0.15] hover:border-slate-500 rounded" />
+                                      <Square size={20} className="text-white/20 hover:text-white/40 rounded" />
                                     )}
                                   </button>
 
-                                  <div className="space-y-1">
-                                    <div className="flex items-center gap-2 flex-wrap">
-                                      <span className="text-[9px] font-mono px-2 py-0.5 bg-slate-950/60 border border-white/[0.03] text-slate-400 rounded-full">
+                                  <div className="space-y-2">
+                                    <div className="flex items-center gap-3 flex-wrap">
+                                      <span className="text-[10px] font-semibold px-2 py-0.5 bg-white/5 border border-white/10 text-white/60 rounded uppercase tracking-widest">
                                         Session {idx + 1}
                                       </span>
                                       
-                                      <span className="text-[10px] font-mono text-slate-400 flex items-center gap-1">
-                                        <Clock size={10} /> {session.durationHours} hours
+                                      <span className="text-[11px] font-semibold text-white/40 flex items-center gap-1.5 uppercase tracking-widest">
+                                        <Clock size={12} /> {session.durationHours} hours
                                       </span>
 
-                                      <span className={`text-[10px] font-mono flex items-center gap-1 px-2 py-0.5 rounded-full ${
+                                      <span className={`text-[10px] font-semibold flex items-center gap-1.5 px-2 py-0.5 rounded uppercase tracking-widest ${
                                         completed 
-                                          ? "text-emerald-400 bg-emerald-950/20" 
+                                          ? "text-emerald-400 bg-emerald-500/10" 
                                           : missed
-                                            ? "text-red-400 bg-red-950/30"
+                                            ? "text-red-400 bg-red-500/10"
                                             : delayed 
-                                              ? "text-amber-400 bg-amber-950/30 animate-pulse" 
-                                              : "text-slate-400 bg-white/[0.02] border border-white/[0.04]"
+                                              ? "text-amber-400 bg-amber-500/10 animate-pulse" 
+                                              : "text-white/40 bg-white/5 border border-white/10"
                                       }`}>
-                                        <Calendar size={10} /> Due by: {session.dueDate} {delayed && " (overdue)"} {missed && " (missed)"}
+                                        <Calendar size={12} /> Due by: {session.dueDate} {delayed && " (overdue)"} {missed && " (missed)"}
                                       </span>
                                     </div>
 
-                                    <h4 className={`text-base font-sans font-normal ${completed ? "text-slate-500 line-through" : missed ? "text-red-450/70" : "text-white"}`}>
+                                    <h4 className={`text-base font-semibold ${completed ? "text-white/40 line-through" : missed ? "text-red-400/80" : "text-white"}`}>
                                       {session.title}
                                     </h4>
                                   </div>
@@ -530,45 +528,45 @@ export default function RecoveryPlanner({
 
                                 <div>
                                   {completed ? (
-                                    <span className="px-2.5 py-0.5 border border-emerald-800/20 bg-emerald-950/20 text-emerald-400 font-mono text-[9px] rounded-full font-bold">
+                                    <span className="px-3 py-1 border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-[10px] rounded uppercase tracking-widest font-semibold">
                                       Completed
                                     </span>
                                   ) : missed ? (
-                                    <div className="flex items-center gap-2">
-                                      <span className="px-2.5 py-0.5 border border-red-800/20 bg-red-950/20 text-red-400 font-mono text-[9px] rounded-full font-bold">
+                                    <div className="flex items-center gap-3">
+                                      <span className="px-3 py-1 border border-red-500/20 bg-red-500/10 text-red-400 text-[10px] rounded uppercase tracking-widest font-semibold">
                                         Missed
                                       </span>
                                       <button
                                         onClick={() => onToggleSession(selectedTask.id, session.id, 'pending')}
-                                        className="text-xs text-slate-450 hover:text-white underline font-mono text-[9px] cursor-pointer"
+                                        className="text-xs text-white/40 hover:text-white underline font-semibold cursor-pointer"
                                       >
                                         Reset
                                       </button>
                                     </div>
                                   ) : delayed ? (
-                                    <div className="flex flex-col sm:flex-row items-end sm:items-center gap-1.5">
+                                    <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2">
                                       <button
                                         onClick={() => onToggleSession(selectedTask.id, session.id, 'missed')}
-                                        className="px-2 py-1 bg-red-950/50 border border-red-900/30 text-red-450 hover:bg-red-950 hover:text-red-400 font-mono text-[9px] rounded-md cursor-pointer transition"
+                                        className="px-3 py-1.5 bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 text-[10px] rounded uppercase tracking-widest font-semibold cursor-pointer transition-colors"
                                       >
                                         Mark as missed
                                       </button>
                                       <button
                                         onClick={handleRecalculatePlan}
-                                        className="px-2 py-1 bg-amber-950/50 border border-amber-900/30 text-amber-400 hover:bg-amber-950 hover:text-amber-300 font-mono text-[9px] rounded-md cursor-pointer transition"
+                                        className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-400 hover:bg-amber-500/20 text-[10px] rounded uppercase tracking-widest font-semibold cursor-pointer transition-colors"
                                       >
                                         Adjust
                                       </button>
                                     </div>
                                   ) : (
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex items-center gap-3">
                                       <button
                                         onClick={() => onToggleSession(selectedTask.id, session.id, 'missed')}
-                                        className="px-2 py-0.5 text-slate-500 hover:text-red-400 font-mono text-[9px] rounded border border-transparent hover:border-red-500/25 transition cursor-pointer"
+                                        className="px-3 py-1.5 text-white/40 hover:text-red-400 text-[10px] rounded border border-transparent hover:border-red-500/20 uppercase tracking-widest font-semibold transition-colors cursor-pointer"
                                       >
                                         Mark as missed
                                       </button>
-                                      <span className="px-2.5 py-0.5 border border-white/[0.04] bg-slate-950 text-slate-500 font-mono text-[9px] rounded-full font-light">
+                                      <span className="px-3 py-1 border border-white/10 bg-white/5 text-white/40 text-[10px] rounded uppercase tracking-widest font-semibold">
                                         Upcoming
                                       </span>
                                     </div>
@@ -583,27 +581,27 @@ export default function RecoveryPlanner({
 
                   </div>
                 ) : (
-                  <div className="p-12 text-center border border-dashed border-white/8 rounded-2xl space-y-6 bg-[#0b1220] text-left">
-                    <AlertTriangle size={34} className="mx-auto text-emerald-400 animate-pulse" />
-                    <div className="space-y-2 text-center">
-                      <h4 className="text-lg font-sans font-bold text-white">No Action Plan Created Yet</h4>
-                      <p className="text-base text-slate-355 max-w-md mx-auto leading-relaxed font-normal">
-                        To make this task easy to complete, let the AI assistant break down your total {selectedTask.estimatedHours} required hours into short, friendly focus focus sessions.
+                  <div className="p-16 text-center border border-dashed border-white/10 rounded-2xl space-y-8 bg-[#111111] text-left shadow-sm">
+                    <AlertTriangle size={48} className="mx-auto text-white/20 mb-2" />
+                    <div className="space-y-3 text-center">
+                      <h4 className="text-xl font-display font-semibold text-white">No Action Plan Created Yet</h4>
+                      <p className="text-sm text-white/50 max-w-md mx-auto leading-relaxed font-light">
+                        To make this task easy to complete, let the AI assistant break down your total {selectedTask.estimatedHours} required hours into short, friendly focus sessions.
                       </p>
                     </div>
 
                     <button
                       onClick={handleGeneratePlan}
                       disabled={generating}
-                      className="px-7 py-3.5 bg-emerald-400 hover:bg-[#10b981] text-[#050816] font-sans font-bold text-sm rounded-full cursor-pointer transition flex items-center justify-center gap-2 mx-auto disabled:opacity-50"
+                      className="px-8 py-4 bg-white hover:bg-gray-200 text-black font-semibold text-sm rounded-full cursor-pointer transition-colors flex items-center justify-center gap-2 mx-auto disabled:opacity-50"
                     >
                       {generating ? (
                         <>
-                          <Loader2 className="animate-spin text-slate-950" size={15} /> PLANNING SESSIONS...
+                          <Loader2 className="animate-spin text-black" size={18} /> PLANNING SESSIONS...
                         </>
                       ) : (
                         <>
-                          <Compass size={15} strokeWidth={2.5} /> Create Step-by-Step Plan
+                          <Compass size={18} strokeWidth={2.5} /> Create Step-by-Step Plan
                         </>
                       )}
                     </button>
@@ -612,7 +610,7 @@ export default function RecoveryPlanner({
 
               </div>
             ) : (
-              <div className="bg-[#0b1220] border border-white/8 rounded-2xl p-12 text-center text-slate-400 font-light">
+              <div className="bg-[#111111] border border-dashed border-white/10 rounded-2xl p-16 text-center text-white/40 font-light">
                 Select a task to view or create a step-by-step action plan.
               </div>
             )}

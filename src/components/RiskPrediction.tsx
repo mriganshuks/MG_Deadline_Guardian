@@ -118,28 +118,27 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
     <div id="risk-prediction-view" className="space-y-8 pb-16">
       
       {/* Visual Header Banner */}
-      <div className="bg-[#0b1220] border border-white/8 p-8 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden text-left">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="space-y-3 max-w-xl z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-950/40 text-emerald-400 border border-emerald-800/25 text-[10px] font-mono rounded-full uppercase tracking-wider font-semibold">
-            <Sparkles size={11} /> Deadline Check
+      <div className="bg-[#111111] border border-white/5 p-8 md:p-10 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-sm text-left">
+        <div className="space-y-4 max-w-xl z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs font-semibold text-white/60 uppercase tracking-widest">
+            <Sparkles size={14} className="text-white/40" /> Deadline Check
           </div>
-          <h1 className="text-3xl font-sans font-bold text-white tracking-tight">Will I Finish on Time?</h1>
-          <p className="text-base text-slate-350 leading-relaxed font-normal tracking-normal">
-            We look at your remaining hours, difficulty, and deadline to see if you have enough time. This helps you start early and finish stress-free.
+          <h1 className="text-3xl md:text-4xl font-display font-semibold text-white tracking-tight">Will I Finish on Time?</h1>
+          <p className="text-base text-white/50 leading-relaxed font-light">
+            We analyze your remaining hours, difficulty, and deadline to see if you have enough time. Start early and finish stress-free.
           </p>
         </div>
         
-        <div className="flex gap-4 shrink-0 font-mono text-center">
-          <div className="px-5 py-4 bg-slate-950/40 border border-white/8 rounded-xl min-w-[110px]">
-            <span className="text-[10px] text-slate-400 block uppercase tracking-wider font-semibold">Behind Schedule</span>
-            <span className="text-2xl font-bold text-red-400 block mt-1 font-mono">
+        <div className="flex gap-4 shrink-0 font-medium text-center">
+          <div className="px-6 py-5 bg-white/5 border border-white/10 rounded-2xl min-w-[120px]">
+            <span className="text-xs text-white/40 block uppercase tracking-widest font-semibold mb-2">Behind</span>
+            <span className="text-3xl font-bold text-red-400 block font-sans">
               {activeTasks.filter(t => t.riskLevel === "critical" || (t.riskScore && t.riskScore >= 75)).length}
             </span>
           </div>
-          <div className="px-5 py-4 bg-slate-950/40 border border-white/8 rounded-xl min-w-[110px]">
-            <span className="text-[10px] text-slate-400 block uppercase tracking-wider font-semibold">Done</span>
-            <span className="text-2xl font-bold text-emerald-400 block mt-1 font-mono">
+          <div className="px-6 py-5 bg-white/5 border border-white/10 rounded-2xl min-w-[120px]">
+            <span className="text-xs text-white/40 block uppercase tracking-widest font-semibold mb-2">Done</span>
+            <span className="text-3xl font-bold text-white block font-sans">
               {tasks.filter(t => t.completed).length}
             </span>
           </div>
@@ -148,41 +147,36 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
 
       {/* High Risk Task Stack Swiper */}
       {getHighRiskCards().length > 0 && (
-        <div className="bg-[#0b1220] border border-red-500/10 p-6 md:p-8 rounded-2xl relative overflow-hidden text-left shadow-2xl space-y-6">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-red-500/5 rounded-full blur-2xl pointer-events-none" />
-          <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
-          
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-red-950/40 border border-red-900/30 rounded-lg text-xs text-red-400 font-mono font-bold uppercase tracking-wider">
-            <ShieldAlert size={14} className="text-red-400 animate-pulse" /> Critical Deadlines At Risk
+        <div className="bg-[#161616] border border-red-500/20 p-6 md:p-8 rounded-2xl relative overflow-hidden text-left shadow-sm space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-red-500/10 border border-red-500/20 rounded-full text-xs text-red-400 font-semibold uppercase tracking-widest">
+            <ShieldAlert size={16} className="text-red-400" /> Critical Deadlines At Risk
           </div>
           
-          <div className="pt-2">
+          <div className="pt-4">
             <GlassStackCard
               items={getHighRiskCards()}
               visibleBehind={1}
-              headerTitle="High-Risk Commitments"
-              headerSubtitle="Swipe or drag to review assignments needing immediate attention"
             />
           </div>
         </div>
       )}
 
       {activeTasks.length === 0 ? (
-        <div className="bg-[#0b1220] border border-dashed border-white/8 p-12 text-center rounded-2xl max-w-lg mx-auto space-y-4">
-          <ShieldCheck size={38} className="mx-auto text-emerald-500/60 mb-2" />
-          <h3 className="text-lg font-sans font-bold text-white">No active tasks found</h3>
-          <p className="text-base text-slate-350 font-normal">Created tasks will appear here for completion risk analysis.</p>
+        <div className="bg-[#111111] border border-dashed border-white/10 p-12 text-center rounded-2xl max-w-xl mx-auto space-y-4 shadow-sm">
+          <ShieldCheck size={48} className="mx-auto text-white/20 mb-2" />
+          <h3 className="text-xl font-display font-semibold text-white">No active tasks found</h3>
+          <p className="text-sm text-white/50 font-light leading-relaxed">Created tasks will appear here for completion risk analysis.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           {/* Sidebar list selection list */}
-          <div className="bg-[#0b1220] border border-white/8 rounded-2xl p-4 lg:col-span-4 space-y-3 text-left">
-            <div className="text-xs font-mono font-bold text-slate-400 tracking-wider px-2 pb-2 border-b border-white/8 uppercase">
+          <div className="bg-[#111111] border border-white/5 rounded-2xl p-6 lg:col-span-4 space-y-4 text-left shadow-sm">
+            <div className="text-xs font-semibold text-white/40 tracking-widest pb-4 border-b border-white/5 uppercase">
               My Tasks
             </div>
 
-            <div className="space-y-1.5 max-h-[420px] overflow-y-auto pr-1 no-scrollbar">
+            <div className="space-y-2 max-h-[420px] overflow-y-auto pr-2 no-scrollbar">
               {activeTasks.map((task) => {
                 const active = task.id === selectedTaskId;
                 const score = task.riskScore;
@@ -191,31 +185,31 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
                   <button
                     key={task.id}
                     onClick={() => setSelectedTaskId(task.id)}
-                    className={`w-full text-left p-3.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-3 text-xs ${
+                    className={`w-full text-left p-4 rounded-xl border transition-colors cursor-pointer flex items-center justify-between gap-4 text-sm ${
                       active
-                        ? "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500/40"
-                        : "bg-slate-950/30 border-white/8 hover:border-emerald-500/10"
+                        ? "bg-white/5 border-white/20"
+                        : "bg-transparent border-transparent hover:bg-white/[0.02]"
                     }`}
                   >
-                    <div className="space-y-1 truncate max-w-xs">
-                      <div className="font-sans font-bold text-white truncate text-[15px]">{task.title}</div>
-                      <div className="font-mono text-[9px] text-slate-500 uppercase flex items-center gap-1.5">
-                        <Calendar size={9} /> {task.deadline} &bull; {task.estimatedHours}h
+                    <div className="space-y-1.5 truncate max-w-[14rem]">
+                      <div className="font-display font-semibold text-white truncate text-base">{task.title}</div>
+                      <div className="text-xs text-white/40 uppercase tracking-wider flex items-center gap-2">
+                        <Calendar size={12} /> {task.deadline} &bull; {task.estimatedHours}h
                       </div>
                     </div>
 
                     {typeof score === "number" ? (
-                      <span className={`px-2 py-0.5 font-mono font-bold rounded-full text-[9px] uppercase shrink-0 ${
+                      <span className={`px-3 py-1 font-semibold rounded-full text-xs uppercase shrink-0 ${
                         task.riskLevel === "critical" || score >= 75
-                          ? "bg-red-500/10 text-red-400 border border-red-500/15"
+                          ? "bg-red-500/10 text-red-400 border border-red-500/20"
                           : score >= 50
-                            ? "bg-amber-500/10 text-amber-400 border border-amber-500/15"
-                            : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/15"
+                            ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
+                            : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
                       }`}>
                         {score}%
                       </span>
                     ) : (
-                      <span className="px-2 py-0.5 bg-slate-900 text-slate-500 border border-white/[0.04] font-mono rounded-full text-[8px] uppercase shrink-0">
+                      <span className="px-3 py-1 bg-white/5 text-white/40 border border-white/10 font-semibold rounded-full text-xs uppercase shrink-0">
                         NONE
                       </span>
                     )}
@@ -228,15 +222,14 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
           {/* Main Predict Inspector */}
           <div className="lg:col-span-8 space-y-6 text-left">
             {selectedTask ? (
-              <div className="bg-[#0b1220] border border-white/8 rounded-2xl p-6 md:p-8 space-y-6 relative shadow-xl text-left">
-                <div className="absolute top-0 left-6 right-6 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/25 to-transparent" />
-
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/8 pb-5 text-left">
-                  <div className="space-y-1.5 text-left">
-                    <span className="text-[9px] text-emerald-400 bg-emerald-950/40 border border-emerald-800/30 px-2.5 py-0.5 rounded-full uppercase tracking-wider font-bold">
-                      {selectedTask.category} OUTLOOK
+              <div className="bg-[#161616] border border-white/5 rounded-2xl p-8 space-y-8 shadow-sm text-left">
+                
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/5 pb-6 text-left">
+                  <div className="space-y-2 text-left">
+                    <span className="text-xs font-semibold text-white/40 uppercase tracking-widest block">
+                      {selectedTask.category} Outlook
                     </span>
-                    <h2 className="text-2xl font-sans font-bold text-white tracking-tight">
+                    <h2 className="text-2xl font-display font-semibold text-white tracking-tight">
                       {selectedTask.title}
                     </h2>
                   </div>
@@ -244,7 +237,7 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
                   <button
                     onClick={() => handleRunAnalysis(selectedTask)}
                     disabled={analyzingTaskId === selectedTask.id}
-                    className="px-5 py-2.5 bg-emerald-400 hover:bg-[#10b981] text-[#050816] text-xs font-mono font-bold rounded-full cursor-pointer transition flex items-center gap-1.5 self-start shrink-0 disabled:opacity-50 uppercase tracking-wider"
+                    className="px-6 py-3 bg-white hover:bg-gray-200 text-black text-sm font-semibold rounded-full cursor-pointer transition-colors flex items-center gap-2 self-start shrink-0 disabled:opacity-50"
                   >
                     {analyzingTaskId === selectedTask.id ? (
                       <>
@@ -263,13 +256,13 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
                     {/* Simplified Student-Friendly Panel */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       {/* Success Chance */}
-                      <div className="p-5 bg-emerald-950/20 border border-emerald-500/15 rounded-2xl flex flex-col items-center justify-center text-center space-y-1">
-                        <span className="text-xs font-mono font-bold uppercase text-emerald-400 tracking-wider">Success Chance</span>
-                        <div className="text-4xl font-mono font-bold text-emerald-400 animate-pulse">
+                      <div className="p-6 bg-[#111111] border border-white/5 rounded-2xl flex flex-col items-center justify-center text-center space-y-2 shadow-sm">
+                        <span className="text-xs font-semibold uppercase text-white/40 tracking-widest">Success Chance</span>
+                        <div className="text-4xl font-display font-semibold text-emerald-400">
                           {100 - selectedTask.riskScore}%
                         </div>
-                        <p className="text-xs text-slate-450 font-normal leading-relaxed text-center mt-1">
-                          Chance of finishing this task on time
+                        <p className="text-xs text-white/50 font-light leading-relaxed text-center">
+                          Predicted chance of finishing on time
                         </p>
                       </div>
 
@@ -287,22 +280,22 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
                           
                         return (
                           <>
-                            <div className="p-5 bg-slate-950/40 border border-white/8 rounded-2xl flex flex-col items-center justify-center text-center space-y-1">
-                              <span className="text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">Days Remaining</span>
-                              <div className="text-4xl font-mono font-bold text-white">
+                            <div className="p-6 bg-[#111111] border border-white/5 rounded-2xl flex flex-col items-center justify-center text-center space-y-2 shadow-sm">
+                              <span className="text-xs font-semibold uppercase text-white/40 tracking-widest">Days Remaining</span>
+                              <div className="text-4xl font-display font-semibold text-white">
                                 {daysRemaining} {daysRemaining === 1 ? "day" : "days"}
                               </div>
-                              <p className="text-xs text-slate-405 font-normal leading-relaxed text-center mt-1">
+                              <p className="text-xs text-white/50 font-light leading-relaxed text-center">
                                 Until deadline
                               </p>
                             </div>
 
-                            <div className="p-5 bg-slate-950/40 border border-white/8 rounded-2xl flex flex-col items-center justify-center text-center space-y-1">
-                              <span className="text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">Hours Required Today</span>
-                              <div className="text-4xl font-mono font-semibold text-amber-400">
+                            <div className="p-6 bg-[#111111] border border-white/5 rounded-2xl flex flex-col items-center justify-center text-center space-y-2 shadow-sm">
+                              <span className="text-xs font-semibold uppercase text-white/40 tracking-widest">Hours Required Today</span>
+                              <div className="text-4xl font-display font-semibold text-amber-400">
                                 {recommendedHoursToday} hr{recommendedHoursToday === 1 ? "" : "s"}
                               </div>
-                              <p className="text-xs text-slate-405 font-normal leading-relaxed text-center mt-1">
+                              <p className="text-xs text-white/50 font-light leading-relaxed text-center">
                                 Daily focus time
                               </p>
                             </div>
@@ -312,20 +305,21 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
                     </div>
 
                     {/* Why This Task Is At Risk */}
-                    <div className="p-6 bg-red-500/[0.01] border border-red-500/10 rounded-2xl space-y-2.5 text-left">
-                      <span className="text-xs font-mono font-bold text-red-400 tracking-wider block uppercase">⚠️ Why This Task Is At Risk</span>
-                      <p className="text-base text-slate-200 leading-relaxed font-normal text-left font-sans">
+                    <div className="p-6 bg-red-500/5 border border-red-500/20 rounded-2xl space-y-3 text-left">
+                      <span className="text-xs font-semibold text-red-400 tracking-widest block uppercase">⚠️ Why This Task Is At Risk</span>
+                      <p className="text-base text-white/80 leading-relaxed font-light text-left">
                         {selectedTask.riskExplanation || "The timeline is short. Breaking this assignment down into smaller daily goals will help you complete it effortlessly."}
                       </p>
                     </div>
 
                     {/* Interactive Toggle Button */}
-                    <div className="flex justify-center border-t border-b border-white/8 py-4">
+                    <div className="flex justify-center border-t border-b border-white/5 py-6">
                       <button
                         onClick={() => setShowDetailed(!showDetailed)}
-                        className="px-4 py-2 bg-[#0b1220] hover:bg-slate-950 border border-white/8 hover:border-emerald-500/25 text-xs font-mono rounded-xl text-slate-350 hover:text-white transition cursor-pointer flex items-center gap-1.5"
+                        className="px-6 py-2.5 bg-[#111111] hover:bg-white/5 border border-white/10 text-xs font-semibold rounded-full text-white/60 hover:text-white transition-colors flex items-center gap-2"
                       >
                         {showDetailed ? "Hide Details" : "Show Details"}
+                        <ChevronRight size={14} className={`transition-transform ${showDetailed ? "rotate-90" : ""}`} />
                       </button>
                     </div>
 
@@ -333,26 +327,26 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
                     {showDetailed && (
                       <div className="space-y-6 pt-2 text-left font-sans">
                         {/* Failure vs Success split ratio */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-950/40 border border-white/8 p-6 rounded-2xl">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#111111] border border-white/5 p-6 rounded-2xl">
                           
                           {/* Success Probability card */}
-                          <div className="p-5 bg-emerald-500/5 rounded-xl border border-emerald-500/15 space-y-2 text-left">
-                            <span className="text-xs font-mono font-bold text-emerald-400 block tracking-wider uppercase">Chance of finishing on time</span>
-                            <div className="text-3xl font-mono font-bold text-emerald-400">
+                          <div className="p-6 bg-emerald-500/5 rounded-2xl border border-emerald-500/20 space-y-3 text-left">
+                            <span className="text-xs font-semibold text-emerald-400 block tracking-widest uppercase">Chance of finishing on time</span>
+                            <div className="text-3xl font-display font-semibold text-emerald-400">
                               {100 - selectedTask.riskScore}%
                             </div>
-                            <p className="text-sm text-slate-300 font-normal leading-relaxed">
+                            <p className="text-sm text-white/50 font-light leading-relaxed">
                               Your predicted chance of finishing this task on time based on your current speed.
                             </p>
                           </div>
       
                           {/* Failure Probability card */}
-                          <div className="p-5 bg-red-500/5 rounded-xl border border-red-500/10 space-y-2 text-left">
-                            <span className="text-xs font-mono font-bold text-red-400 block tracking-wider uppercase">Chance of running out of time</span>
-                            <div className="text-3xl font-mono font-bold text-red-400">
+                          <div className="p-6 bg-red-500/5 rounded-2xl border border-red-500/20 space-y-3 text-left">
+                            <span className="text-xs font-semibold text-red-400 block tracking-widest uppercase">Chance of running out of time</span>
+                            <div className="text-3xl font-display font-semibold text-red-400">
                               {selectedTask.failureProbability !== undefined ? selectedTask.failureProbability : selectedTask.riskScore}%
                             </div>
-                            <p className="text-sm text-slate-300 font-normal leading-relaxed">
+                            <p className="text-sm text-white/50 font-light leading-relaxed">
                               The estimated risk of missing the deadline due to a tight schedule, complexity, or delays.
                             </p>
                           </div>
@@ -360,47 +354,47 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
                         </div>
 
                         {/* Contributing Factors & AI Reasoning */}
-                        <div className="space-y-4">
+                        <div className="space-y-6">
                           
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {/* Factor 1 */}
-                            <div className="bg-slate-950/40 border border-white/8 p-4 rounded-xl space-y-2.5 text-left">
-                              <div className="flex items-center justify-between text-xs font-mono">
-                                <span className="text-slate-400">How urgent this task is</span>
-                                <span className="text-slate-200 font-bold">{selectedTask.riskFactors?.urgencyScore}%</span>
+                            <div className="bg-[#111111] border border-white/5 p-6 rounded-2xl space-y-4 text-left">
+                              <div className="flex items-center justify-between text-xs font-semibold text-white/40 uppercase tracking-widest">
+                                <span>Urgency</span>
+                                <span className="text-white">{selectedTask.riskFactors?.urgencyScore}%</span>
                               </div>
-                              <div className="h-1 bg-slate-900 rounded-full overflow-hidden">
+                              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
                                 <div className="h-full bg-red-400" style={{ width: `${selectedTask.riskFactors?.urgencyScore}%` }} />
                               </div>
-                              <p className="text-xs text-slate-400 leading-normal font-normal">
+                              <p className="text-xs text-white/50 leading-relaxed font-light">
                                 Time remaining compared to the estimated work hours.
                               </p>
                             </div>
                             
                             {/* Factor 2 */}
-                            <div className="bg-slate-950/40 border border-white/8 p-4 rounded-xl space-y-2.5 text-left">
-                              <div className="flex items-center justify-between text-xs font-mono">
-                                <span className="text-slate-400">Task difficulty</span>
-                                <span className="text-slate-200 font-bold">{selectedTask.riskFactors?.complexityScore}%</span>
+                            <div className="bg-[#111111] border border-white/5 p-6 rounded-2xl space-y-4 text-left">
+                              <div className="flex items-center justify-between text-xs font-semibold text-white/40 uppercase tracking-widest">
+                                <span>Difficulty</span>
+                                <span className="text-white">{selectedTask.riskFactors?.complexityScore}%</span>
                               </div>
-                              <div className="h-1 bg-slate-900 rounded-full overflow-hidden">
+                              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
                                 <div className="h-full bg-emerald-400" style={{ width: `${selectedTask.riskFactors?.complexityScore}%` }} />
                               </div>
-                              <p className="text-xs text-slate-400 leading-normal font-normal">
+                              <p className="text-xs text-white/50 leading-relaxed font-light">
                                 Task difficulty based on priority and details.
                               </p>
                             </div>
  
                             {/* Factor 3 */}
-                            <div className="bg-slate-950/40 border border-white/8 p-4 rounded-xl space-y-2.5 text-left">
-                              <div className="flex items-center justify-between text-xs font-mono">
-                                <span className="text-slate-400">Extra time available</span>
-                                <span className="text-emerald-400 font-bold">{selectedTask.riskFactors?.bufferSafetyScore}%</span>
+                            <div className="bg-[#111111] border border-white/5 p-6 rounded-2xl space-y-4 text-left">
+                              <div className="flex items-center justify-between text-xs font-semibold text-white/40 uppercase tracking-widest">
+                                <span>Extra Time</span>
+                                <span className="text-emerald-400">{selectedTask.riskFactors?.bufferSafetyScore}%</span>
                               </div>
-                              <div className="h-1 bg-slate-900 rounded-full overflow-hidden">
+                              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
                                 <div className="h-full bg-emerald-400" style={{ width: `${selectedTask.riskFactors?.bufferSafetyScore}%` }} />
                               </div>
-                              <p className="text-xs text-slate-400 leading-normal font-normal">
+                              <p className="text-xs text-white/50 leading-relaxed font-light">
                                 Extra safety cushion to handle delays or unexpected events.
                               </p>
                             </div>
@@ -408,13 +402,13 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
 
                           {/* Main Risk Factors list */}
                           {selectedTask.mainRiskFactors && selectedTask.mainRiskFactors.length > 0 && (
-                            <div className="bg-slate-950/40 border border-white/8 p-5 rounded-xl space-y-3 text-left">
-                              <span className="text-xs font-mono font-bold text-red-400 tracking-wider block uppercase">Main risk factors:</span>
-                              <ul className="space-y-2 text-sm text-slate-200 font-sans">
+                            <div className="bg-[#111111] border border-white/5 p-6 rounded-2xl space-y-4 text-left">
+                              <span className="text-xs font-semibold text-red-400 tracking-widest block uppercase">Main risk factors</span>
+                              <ul className="space-y-3 text-sm text-white/80 font-light">
                                 {selectedTask.mainRiskFactors.map((factor, idx) => (
-                                  <li key={idx} className="flex items-start gap-1.5 leading-normal">
-                                    <span className="text-red-400 font-bold shrink-0">&bull;</span>
-                                    <span className="font-normal text-slate-200">{factor}</span>
+                                  <li key={idx} className="flex items-start gap-3 leading-relaxed">
+                                    <span className="text-red-400 font-bold mt-0.5">&bull;</span>
+                                    <span>{factor}</span>
                                   </li>
                                 ))}
                               </ul>
@@ -422,27 +416,27 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
                           )}
 
                           {/* AI Assessment & Recommended Action Plan */}
-                          <div className="p-6 bg-white/[0.01] border border-white/8 rounded-2xl space-y-4 text-left font-sans">
-                            <div className="space-y-1.5">
-                              <span className="text-xs font-mono font-bold tracking-wider block flex items-center gap-1 text-emerald-400 uppercase">
-                                <Info size={11} className="text-emerald-400" /> AI Assistant Analysis
+                          <div className="p-8 bg-white/5 border border-white/10 rounded-2xl space-y-6 text-left">
+                            <div className="space-y-3">
+                              <span className="text-xs font-semibold tracking-widest flex items-center gap-2 text-white/40 uppercase">
+                                <Info size={14} className="text-white/60" /> AI Assistant Analysis
                               </span>
-                              <p className="text-base text-slate-200 leading-relaxed font-normal">
+                              <p className="text-base text-white/80 leading-relaxed font-light">
                                 "{selectedTask.riskExplanation || 'The deadline is coming up fast. We recommend starting soon or generating an action plan to catch up.'}"
                               </p>
                             </div>
 
-                            <div className="pt-4 border-t border-white/8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                              <div className="space-y-0.5">
-                                <span className="text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">Recommended action</span>
-                                <p className="text-sm text-emerald-300 font-mono font-semibold">
+                            <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+                              <div className="space-y-2">
+                                <span className="text-xs font-semibold uppercase text-white/40 tracking-widest">Recommended action</span>
+                                <p className="text-sm text-white font-semibold">
                                   {selectedTask.recommendedIntervention || (selectedTask.riskScore >= 70 ? "Create a step-by-step action plan" : "Schedule a few focus sessions")}
                                 </p>
                               </div>
                               
                               <button
                                 onClick={() => onUpdateTaskRisk(selectedTask.id, { riskScore: 12, riskLevel: 'low' })}
-                                className="px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 text-xs font-mono rounded-lg transition font-semibold cursor-pointer"
+                                className="px-6 py-2.5 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 text-sm rounded-full transition-colors font-semibold cursor-pointer shrink-0"
                               >
                                 Mark as Safe
                               </button>
@@ -454,17 +448,17 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
                     )}
                   </div>
                 ) : (
-                  <div className="bg-[#0b1220] border border-white/8 p-12 text-center rounded-2xl space-y-5 text-left">
-                    <AlertTriangle size={34} className="mx-auto text-amber-500 animate-pulse" />
+                  <div className="bg-[#111111] border border-white/5 p-12 text-center rounded-2xl space-y-6 text-left shadow-sm">
+                    <AlertTriangle size={48} className="mx-auto text-amber-500/50 mb-2" />
                     <div className="text-center">
-                      <h4 className="text-lg font-sans font-bold text-white">No Risk Analysis Yet</h4>
-                      <p className="text-base text-slate-350 mt-1 max-w-sm mx-auto font-normal leading-relaxed">
+                      <h4 className="text-xl font-display font-semibold text-white">No Risk Analysis Yet</h4>
+                      <p className="text-sm text-white/50 mt-2 max-w-sm mx-auto font-light leading-relaxed">
                         This task has not been analyzed for deadline risks yet. Let the assistant evaluate it for you.
                       </p>
                     </div>
                     <button
                       onClick={() => handleRunAnalysis(selectedTask)}
-                      className="px-6 py-3 bg-emerald-400 hover:bg-[#10b981] text-[#050816] text-sm font-mono font-bold rounded-full cursor-pointer transition mx-auto block"
+                      className="px-6 py-3 bg-white hover:bg-gray-200 text-black text-sm font-semibold rounded-full cursor-pointer transition-colors mx-auto block"
                     >
                       Check Deadline Risk &rarr;
                     </button>
@@ -473,7 +467,7 @@ export default function RiskPrediction({ tasks, onUpdateTaskRisk }: RiskPredicti
 
               </div>
             ) : (
-              <div className="bg-[#0b1220] border border-white/8 rounded-2xl p-12 text-center text-slate-300 font-normal">
+              <div className="bg-[#111111] border border-dashed border-white/10 rounded-2xl p-16 text-center text-white/40 font-light">
                 Select a task to display its completion risk details.
               </div>
             )}

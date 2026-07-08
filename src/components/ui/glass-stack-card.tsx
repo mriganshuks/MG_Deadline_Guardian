@@ -85,8 +85,8 @@ export const GlassStackCard = ({ items, visibleBehind = 2, headerTitle, headerSu
       {(headerTitle || headerSubtitle) && (
         <div className="text-left space-y-1 mb-4">
           {headerTitle && (
-            <h3 className="text-lg font-display font-bold text-white tracking-tight flex items-center gap-1.5 uppercase">
-              <Sparkles size={14} className="text-cyan-400" /> {headerTitle}
+            <h3 className="text-xl font-display font-semibold text-white tracking-tight flex items-center gap-2">
+              <Sparkles size={16} className="text-white/60" /> {headerTitle}
             </h3>
           )}
           {headerSubtitle && (
@@ -125,7 +125,7 @@ export const GlassStackCard = ({ items, visibleBehind = 2, headerTitle, headerSu
           const getTagClass = (type: string) => {
             switch (type) {
               case 'featured':
-                return 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20';
+                return 'bg-white/10 text-white border border-white/20';
               case 'danger':
                 return 'bg-red-500/10 text-red-400 border border-red-500/20';
               case 'warning':
@@ -133,7 +133,7 @@ export const GlassStackCard = ({ items, visibleBehind = 2, headerTitle, headerSu
               case 'success':
                 return 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20';
               default:
-                return 'bg-slate-800/60 text-slate-300 border border-white/[0.05]';
+                return 'bg-white/5 text-white/70 border border-white/10';
             }
           };
 
@@ -148,8 +148,8 @@ export const GlassStackCard = ({ items, visibleBehind = 2, headerTitle, headerSu
               onMouseDown={(e) => handleDragStart(e, index)}
               onTouchStart={(e) => handleDragStart(e, index)}
             >
-              {/* Highlight top border gradient */}
-              <div className="absolute top-0 left-8 right-8 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
+              {/* Clean top border indicator */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-white/10" />
               
               <div className="p-4 md:p-5 space-y-3">
                 
@@ -157,20 +157,20 @@ export const GlassStackCard = ({ items, visibleBehind = 2, headerTitle, headerSu
                 <div className="flex items-start gap-4 text-left">
                   {/* Decorative Initials or Icon */}
                   {IconComponent ? (
-                    <div className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-cyan-400 border border-cyan-500/20" style={{ background: item.avatarGradient || 'linear-gradient(135deg, rgba(6,182,212,0.15), rgba(139,92,246,0.15))' }}>
+                    <div className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-white/80 border border-white/10 bg-white/5">
                       <IconComponent size={20} />
                     </div>
                   ) : item.initials ? (
-                    <div className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-white font-mono font-bold text-sm border border-white/[0.05]" style={{ background: item.avatarGradient || 'linear-gradient(135deg, #1e293b, #0f172a)' }}>
+                    <div className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-white font-medium text-sm border border-white/10 bg-white/5">
                       {item.initials}
                     </div>
                   ) : null}
 
-                  <div className="space-y-0.5">
-                    <h3 className="text-base md:text-lg font-display font-bold text-white tracking-tight leading-tight">
+                  <div className="space-y-1">
+                    <h3 className="text-lg md:text-xl font-display font-semibold text-white tracking-tight leading-tight">
                       {item.title}
                     </h3>
-                    <p className="text-[10px] md:text-xs font-mono text-cyan-400 uppercase tracking-wider">
+                    <p className="text-xs font-medium text-white/50 tracking-wide uppercase">
                       {item.subtitle}
                     </p>
                   </div>
@@ -213,13 +213,13 @@ export const GlassStackCard = ({ items, visibleBehind = 2, headerTitle, headerSu
 
                 {/* Optional Action CTA Button - Min 44px height */}
                 {item.onAction && (
-                  <div className="pt-2">
+                  <div className="pt-4">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         item.onAction?.();
                       }}
-                      className="w-full h-11 min-h-[44px] flex items-center justify-center gap-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/20 font-mono text-sm font-bold transition-all cursor-pointer"
+                      className="w-full h-11 min-h-[44px] flex items-center justify-center gap-2 rounded-xl bg-white text-black font-semibold text-sm transition-all cursor-pointer hover:bg-gray-200"
                     >
                       <span>{item.actionText || 'Take Action'}</span>
                       <ArrowRight size={15} />
@@ -242,8 +242,8 @@ export const GlassStackCard = ({ items, visibleBehind = 2, headerTitle, headerSu
               key={index}
               aria-label={`Go to slide ${index + 1}`}
               onClick={() => navigate(index)}
-              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                isActive ? 'w-8 bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)]' : 'w-2.5 bg-slate-700 hover:bg-slate-500'
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                isActive ? 'w-8 bg-white' : 'w-2 bg-white/20 hover:bg-white/40'
               }`}
             />
           );
