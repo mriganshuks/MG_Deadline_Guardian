@@ -256,37 +256,8 @@ export default function App() {
       }
     });
 
-    // Message listener for the Popup-Based OAuth callback flow (SameSite iframe workaround)
-    const handleAuthMessage = async (event: MessageEvent) => {
-      if (event.origin !== window.location.origin) return;
-      if (event.data?.type === 'SUPABASE_AUTH_SUCCESS') {
-        const hash = event.data.hash;
-        if (hash) {
-          // Parse access token and refresh token from hash
-          const params = new URLSearchParams(hash.substring(1));
-          const accessToken = params.get("access_token");
-          const refreshToken = params.get("refresh_token");
-          
-          if (accessToken && refreshToken) {
-            const { data, error } = await supabase.auth.setSession({
-              access_token: accessToken,
-              refresh_token: refreshToken
-            });
-            if (error) {
-              console.error("Failed to set session from OAuth popup:", error);
-            } else if (data.session) {
-              await handleAuthSuccess(data.session.user, data.session.provider_token);
-            }
-          }
-        }
-      }
-    };
-
-    window.addEventListener("message", handleAuthMessage);
-
     return () => {
       subscription.unsubscribe();
-      window.removeEventListener("message", handleAuthMessage);
     };
   }, []);
 
@@ -362,16 +333,15 @@ export default function App() {
     try {
       setSyncFeedback({ type: "info", message: "Connecting to Google..." });
       
-      const { data, error } = await supabase.auth.signInWithOAuth({
+      const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: `${window.location.origin}`,
           scopes: 'https://www.googleapis.com/auth/calendar',
           queryParams: {
             access_type: 'offline',
             prompt: 'consent'
-          },
-          skipBrowserRedirect: true
+          }
         }
       });
       
@@ -379,23 +349,6 @@ export default function App() {
         throw error;
       }
       
-      if (data?.url) {
-        const width = 600;
-        const height = 700;
-        const left = window.screenX + (window.outerWidth - width) / 2;
-        const top = window.screenY + (window.outerHeight - height) / 2;
-        const popup = window.open(
-          data.url,
-          "SupabaseGoogleSignInPopup",
-          `width=${width},height=${height},left=${left},top=${top},scrollbars=yes,status=no`
-        );
-        
-        if (!popup) {
-          setSyncFeedback({ type: "error", message: "Popup blocked! Please allow popups for this app to authenticate with Google." });
-        }
-      } else {
-        throw new Error("Could not acquire authentication URL from Supabase.");
-      }
     } catch (err: any) {
       console.error("Google login failed:", err);
       const friendlyMessage = err?.message || "Sign-In failed. Please try again.";
