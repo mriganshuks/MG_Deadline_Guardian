@@ -5,6 +5,7 @@ import LandingPage from "./components/LandingPage";
 import Dashboard from "./components/Dashboard";
 import AddTask from "./components/AddTask";
 import Insights from "./components/Insights";
+import AnalyticsDashboard from "./components/AnalyticsDashboard";
 import { Task, RecoveryPlan, SimulationResult } from "./types";
 import { initialTasks } from "./initialTasks";
 import Hls from "hls.js";
@@ -680,6 +681,10 @@ export default function App() {
             onAddTask={handleAddTask} 
             onCancel={() => setCurrentTab("dashboard")} 
           />
+        );
+      case "analytics":
+        return (
+          <AnalyticsDashboard tasks={tasks} />
         );
       case "insights":
         return (

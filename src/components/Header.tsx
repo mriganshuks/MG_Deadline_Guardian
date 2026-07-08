@@ -1,5 +1,5 @@
 import React from "react";
-import { Shield, LayoutDashboard, PlusCircle, AlertTriangle, ListChecks, Activity, ArrowLeft } from "lucide-react";
+import { Shield, LayoutDashboard, PlusCircle, AlertTriangle, ListChecks, Activity, ArrowLeft, BarChart3 } from "lucide-react";
 import { Task } from "../types";
 import { User } from "@supabase/supabase-js";
 
@@ -58,7 +58,8 @@ export default function Header({
 
   const navItems = [
     { id: "dashboard", label: "Temporal Outcome Center", icon: Activity },
-    { id: "insights", label: "AI Insights & Habits", icon: LayoutDashboard },
+    { id: "analytics", label: "AI Analytics & Insights", icon: BarChart3 },
+    { id: "insights", label: "Risk & Recovery Planner", icon: LayoutDashboard },
     { id: "add-task", label: "Track New Deadline", icon: PlusCircle },
   ];
 
